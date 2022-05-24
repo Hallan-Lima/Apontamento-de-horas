@@ -3,6 +3,7 @@ include 'assets/dist/sql/.env';
 ?>
 <!doctype html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,7 +24,9 @@ include 'assets/dist/sql/.env';
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/dist/css/bootstrap-datetimepicker.min.css">
 
+
 </head>
+
 <body>
     <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
         <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Apontamento de horas</a>
@@ -72,25 +75,25 @@ include 'assets/dist/sql/.env';
                     </ul>
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
                         <span>Cadastrar</span>
-                        <a class="link-secondary" href="#" aria-label="Add a new report">
+                        <a class="link-secondary">
                             <span data-feather="plus-circle"></span>
                         </a>
                     </h6>
                     <ul class="nav flex-column mb-2">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="#" data-bs-target="#modalCliente" data-bs-toggle="modal">
                                 <span data-feather="file-text"></span>
                                 Cliente
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="#" data-bs-target="#modalProjeto" data-bs-toggle="modal">
                                 <span data-feather="file-text"></span>
                                 Projeto
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="#" data-bs-target="#modalTarefa" data-bs-toggle="modal">
                                 <span data-feather="file-text"></span>
                                 Tarefa
                             </a>
@@ -134,7 +137,7 @@ include 'assets/dist/sql/.env';
                         <div class="row">
                             <div class="col d-grid">
                                 <button type="button" class="btn btn-outline-success">Salvar/Start</button>
-                            </div>    
+                            </div>
                             <div class="col-md-2 datepickers">
                                 <div class="form-group">
                                     <div class="input-group date" id="id_1">
@@ -150,7 +153,7 @@ include 'assets/dist/sql/.env';
                                 </div>
                             </div>
                             <div class="col-auto">
-                                <input type="text" class="form-control" placeholder="Tempo total"/>
+                                <input type="text" class="form-control" placeholder="Tempo total" />
                             </div>
                         </div>
                     </div>
@@ -300,6 +303,130 @@ include 'assets/dist/sql/.env';
             </main>
         </div>
     </div>
+
+    <!-- Modal -->
+    <!-- INICIO - Modal Cliente -->
+    <div class="modal fade" id="modalCliente" tabindex="-1" aria-labelledby="modalCliente" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Registrar Cliente</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-2">
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Nome" aria-label="nome">
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" placeholder="R$ por Hora" aria-label="valor por hora">
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <textarea class="form-control" rows="3" placeholder="Descrição"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col mb-2">
+                            <input type="text" class="form-control" placeholder="Telefone" aria-label="telefone">
+                        </div>
+                        <div class="col mb-2">
+                            <input type="text" class="form-control" placeholder="Email" aria-label="email">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" id="cadastrarCliente" class="btn btn-primary">Cadastrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- FIM - Modal Cliente -->
+    <!-- INICIO - Modal Projeto -->
+    <div class="modal fade" id="modalProjeto" tabindex="-1" aria-labelledby="modalProjeto" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Registrar Projeto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="col mb-2">
+                        <input type="text" class="form-control" placeholder="Nome do projeto" aria-label="nome do projeto">
+                    </div>
+                    <div class="mb-2">
+                        <textarea class="form-control" rows="3" placeholder="Descrição"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col mb-2">
+                            <input class="form-control" list="datalistOptions" placeholder="Cliente" required>
+                            <datalist id="datalistOptions">
+                                <option value="San Francisco">
+                                <option value="New York">
+                                <option value="Seattle">
+                                <option value="Los Angeles">
+                                <option value="Chicago">
+                            </datalist>
+                        </div>
+                        <div class="col mb-2">
+                            <input class="form-control" list="datalistOptions" placeholder="Tarefa" required>
+                            <datalist id="datalistOptions">
+                                <option value="San Francisco">
+                                <option value="New York">
+                                <option value="Seattle">
+                                <option value="Los Angeles">
+                                <option value="Chicago">
+                            </datalist>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="R$ por Hora" aria-label="valor por hora">
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" placeholder="Valor único" aria-label="valor unico">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                    <button type="button" id="cadastrarProjeto" class="btn btn-primary">Cadastrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- FIM - Modal Projeto -->
+    <!-- INICIO - Modal Tarefas -->
+    <div class="modal fade" id="modalTarefa" tabindex="-1" aria-labelledby="modalTarefa" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Registrar Tarefa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="/assets/dist/sql/sql.php" method="post">
+                    <div class="modal-body">
+                        <div class="col mb-2">
+                            <input type="text" name="nome" class="form-control" id="tarefaNome" placeholder="Nome" aria-label="nome">
+                        </div>
+                        <div class="mb-2">
+                            <textarea class="form-control" name="descricao" rows="3" id="tarefaDescricao" placeholder="Descrição"></textarea>
+                        </div>
+                        <div class="col mb-2">
+                            <input type="text" name="valor" class="form-control" id="tarefaValor" placeholder="Valor adicional" aria-label="valor adicional">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="button" name="validaOpcao" value="cadastrarTarefa" id="cadastrarTarefa" class="btn btn-primary">Cadastrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- FIM - Modal Tarefas -->
+    <!-- Modal -->
+
     <!-- datepickers core JS -->
     <script src="assets/dist/js/jquery.min.js"></script>
     <script src="assets/dist/js/popper.js"></script>
@@ -313,5 +440,6 @@ include 'assets/dist/sql/.env';
     <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/dist/js/dashboard.js"></script>
 </body>
+<script src="assets/dist/js/scripts.js"></script>
 
 </html>
