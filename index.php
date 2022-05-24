@@ -313,31 +313,33 @@ include 'assets/dist/sql/.env';
                     <h5 class="modal-title">Registrar Cliente</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="fechar"></button>
                 </div>
-                <div class="modal-body">
-                    <div class="row mb-2">
-                        <div class="col">
-                            <input type="text" class="form-control" placeholder="Nome" aria-label="nome">
+                <form action="assets/dist/sql/sql.php" method="post">
+                    <div class="modal-body">
+                        <div class="row mb-2">
+                            <div class="col">
+                                <input type="text" class="form-control" name="nome" placeholder="Nome" aria-label="nome">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" name="valor" placeholder="R$ por Hora" aria-label="valor por hora">
+                            </div>
                         </div>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control" placeholder="R$ por Hora" aria-label="valor por hora">
+                        <div class="mb-2">
+                            <textarea class="form-control" rows="3" name="descricao" placeholder="Descrição"></textarea>
+                        </div>
+                        <div class="row">
+                            <div class="col mb-2">
+                                <input type="text" class="form-control" name="telefone" placeholder="Telefone" aria-label="telefone">
+                            </div>
+                            <div class="col mb-2">
+                                <input type="text" class="form-control" name="email" placeholder="Email" aria-label="email">
+                            </div>
                         </div>
                     </div>
-                    <div class="mb-2">
-                        <textarea class="form-control" rows="3" placeholder="Descrição"></textarea>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="submit" id="cadastrarCliente" name="validaOpcao" value="cadastrarCliente" class="btn btn-primary">Cadastrar</button>
                     </div>
-                    <div class="row">
-                        <div class="col mb-2">
-                            <input type="text" class="form-control" placeholder="Telefone" aria-label="telefone">
-                        </div>
-                        <div class="col mb-2">
-                            <input type="text" class="form-control" placeholder="Email" aria-label="email">
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button type="button" id="cadastrarCliente" class="btn btn-primary">Cadastrar</button>
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -404,13 +406,13 @@ include 'assets/dist/sql/.env';
                     <h5 class="modal-title">Registrar Tarefa</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="/assets/dist/sql/sql.php" method="post">
+                <form action="assets/dist/sql/sql.php" method="post">
                     <div class="modal-body">
                         <div class="col mb-2">
                             <input type="text" name="nome" class="form-control" id="tarefaNome" placeholder="Nome" aria-label="nome">
                         </div>
                         <div class="mb-2">
-                            <textarea class="form-control" name="descricao" rows="3" id="tarefaDescricao" placeholder="Descrição"></textarea>
+                            <textarea name="descricao" class="form-control" rows="3" id="tarefaDescricao" placeholder="Descrição"></textarea>
                         </div>
                         <div class="col mb-2">
                             <input type="text" name="valor" class="form-control" id="tarefaValor" placeholder="Valor adicional" aria-label="valor adicional">
@@ -418,7 +420,7 @@ include 'assets/dist/sql/.env';
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                        <button type="button" name="validaOpcao" value="cadastrarTarefa" id="cadastrarTarefa" class="btn btn-primary">Cadastrar</button>
+                        <button type="submit" name="validaOpcao" value="cadastrarTarefa" id="cadastrarTarefa" class="btn btn-primary">Cadastrar</button>
                     </div>
                 </form>
             </div>
