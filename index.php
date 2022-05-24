@@ -317,10 +317,10 @@ include 'assets/dist/sql/.env';
                     <div class="modal-body">
                         <div class="row mb-2">
                             <div class="col">
-                                <input type="text" class="form-control" name="nome" placeholder="Nome" aria-label="nome">
+                                <input type="text" class="form-control" name="nome" placeholder="Nome" aria-label="nome" required>
                             </div>
                             <div class="col-md-4">
-                                <input type="text" class="form-control" name="valor" placeholder="R$ por Hora" aria-label="valor por hora">
+                                <input type="text" class="form-control" name="valor" placeholder="R$ por Hora" aria-label="valor por hora" required>
                             </div>
                         </div>
                         <div class="mb-2">
@@ -352,48 +352,50 @@ include 'assets/dist/sql/.env';
                     <h5 class="modal-title">Registrar Projeto</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <div class="col mb-2">
-                        <input type="text" class="form-control" placeholder="Nome do projeto" aria-label="nome do projeto">
-                    </div>
-                    <div class="mb-2">
-                        <textarea class="form-control" rows="3" placeholder="Descrição"></textarea>
-                    </div>
-                    <div class="row">
+                <form action="assets/dist/sql/sql.php" method="post">
+                    <div class="modal-body">
                         <div class="col mb-2">
-                            <input class="form-control" list="datalistOptions" placeholder="Cliente" required>
-                            <datalist id="datalistOptions">
-                                <option value="San Francisco">
-                                <option value="New York">
-                                <option value="Seattle">
-                                <option value="Los Angeles">
-                                <option value="Chicago">
-                            </datalist>
+                            <input type="text" class="form-control" name="nome" placeholder="Nome do projeto" aria-label="nome do projeto" required>
                         </div>
-                        <div class="col mb-2">
-                            <input class="form-control" list="datalistOptions" placeholder="Tarefa" required>
-                            <datalist id="datalistOptions">
-                                <option value="San Francisco">
-                                <option value="New York">
-                                <option value="Seattle">
-                                <option value="Los Angeles">
-                                <option value="Chicago">
-                            </datalist>
+                        <div class="mb-2">
+                            <textarea class="form-control" rows="3" name="descricao" placeholder="Descrição"></textarea>
+                        </div>
+                        <div class="row">
+                            <div class="col mb-2">
+                                <input class="form-control" list="datalistOptions" name="cliente" placeholder="Cliente" required>
+                                <datalist id="datalistOptions">
+                                    <option value="San Francisco">
+                                    <option value="New York">
+                                    <option value="Seattle">
+                                    <option value="Los Angeles">
+                                    <option value="Chicago">
+                                </datalist>
+                            </div>
+                            <div class="col mb-2">
+                                <input class="form-control" list="datalistOptions" name="tarefa" placeholder="Tarefa" required>
+                                <datalist id="datalistOptions">
+                                    <option value="San Francisco">
+                                    <option value="New York">
+                                    <option value="Seattle">
+                                    <option value="Los Angeles">
+                                    <option value="Chicago">
+                                </datalist>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col">
+                                <input type="text" class="form-control" name="valorH" placeholder="R$ por Hora" aria-label="valor por hora">
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" name="valorU" placeholder="Valor único" aria-label="valor unico">
+                            </div>
                         </div>
                     </div>
-                    <div class="row mb-2">
-                        <div class="col">
-                            <input type="text" class="form-control" placeholder="R$ por Hora" aria-label="valor por hora">
-                        </div>
-                        <div class="col">
-                            <input type="text" class="form-control" placeholder="Valor único" aria-label="valor unico">
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="submit" id="cadastrarProjeto" name="validaOpcao" value="cadastrarProjeto" class="btn btn-primary">Cadastrar</button>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                    <button type="button" id="cadastrarProjeto" class="btn btn-primary">Cadastrar</button>
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -409,7 +411,7 @@ include 'assets/dist/sql/.env';
                 <form action="assets/dist/sql/sql.php" method="post">
                     <div class="modal-body">
                         <div class="col mb-2">
-                            <input type="text" name="nome" class="form-control" id="tarefaNome" placeholder="Nome" aria-label="nome">
+                            <input type="text" name="nome" class="form-control" id="tarefaNome" placeholder="Nome" aria-label="nome" required>
                         </div>
                         <div class="mb-2">
                             <textarea name="descricao" class="form-control" rows="3" id="tarefaDescricao" placeholder="Descrição"></textarea>
@@ -428,6 +430,7 @@ include 'assets/dist/sql/.env';
     </div>
     <!-- FIM - Modal Tarefas -->
     <!-- Modal -->
+
 
     <!-- datepickers core JS -->
     <script src="assets/dist/js/jquery.min.js"></script>
