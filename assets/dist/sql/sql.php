@@ -1,8 +1,15 @@
 <?php
-
 if (isset($_POST['validaOpcao'])) {
     $validaOpcao = $_POST['validaOpcao'];
+    montarQuery();
 }
+function montarQuery() {
+global $validaOpcao;
+$insertTable = "INSERT INTO ";
+$tarefaTabela = 'tarefas';
+$clienteTabela = 'cliente';
+$projetoTabela = 'projetos';
+
 if (isset($_POST['nome'])) {
     $nome = $_POST['nome'];
     $nomeQuery = " nome='".$nome."' ";
@@ -47,20 +54,22 @@ if (isset($_POST['email'])) {
 }
 if (isset($_POST['cliente'])) {
     $cliente = $_POST['cliente'];
-    $clienteQuery = " idCliente='".$cliente."' ";
-    $clienteQuery = incluiAnd($clienteQuery);
+    $clienteQuery = " nome='".$cliente."' ";
+    $queryIDCliente = 'SELECT id FROM '.$clienteTabela.' WHERE '.$clienteQuery;
+    $queryIDCliente = queryBD($queryIDCliente);
+    $queryIDCliente = mysqli_fetch_assoc($queryIDCliente);
+    $idCliente = $queryIDCliente['id'];
 }
 if (isset($_POST['tarefa'])) {
+    if ($_POST['tarefa'] != '') {
     $tarefa = $_POST['tarefa'];
-    $tarefaQuery = " idTarefas='".$tarefa."' ";
-    $tarefaQuery = incluiAnd($tarefaQuery);
+    $tarefaQuery = " nome='".$tarefa."' ";
+    $queryIDTarefa = 'SELECT id FROM '.$tarefaQuery.' WHERE '.$tarefaQuery;
+    $queryIDTarefa = queryBD($queryIDTarefa);
+    $queryIDTarefa = mysqli_fetch_assoc($queryIDTarefa);
+    $idTarefa = $queryIDTarefa['id'];
+    }
 }
-
-$insertTable = "INSERT INTO ";
-$tarefaTabela = 'tarefas';
-$clienteTabela = 'cliente';
-$projetoTabela = 'projetos';
-
 switch ($validaOpcao) {
     case 'cadastrarTarefa':
         $query = $insertTable.$tarefaTabela." (`nome`,`descricao`,`valor`) 
@@ -72,24 +81,24 @@ switch ($validaOpcao) {
         break;
     case 'cadastrarProjeto':
         $query = $insertTable.$projetoTabela." (`nome`,`descricao`,`".$opProjetosValor."`,`idCliente`,`idTarefas`) 
-        VALUES ('".$nome."','".$descricao."','".$valor."','".$cliente."','".$tarefa."') ";
+        VALUES ('".$nome."','".$descricao."','".$valor."','".$idCliente."','".$idTarefa."') ";
         break;
     
     default:
-    retornUser('2');
         break;
 }
-$query = adicionaBD($query);
+echo $query;
+$query = queryBD($query);
 if ($query) {
     retornUser('1');
 }else {
     retornUser('3');
-}
+}}
 function incluiAnd($var){
     $var = $var.' AND ';
     return $var;
 }
-function adicionaBD($query) {
+function queryBD($query) {
     include '.env';
     $sql = mysqli_query($conn, $query);
     return $sql;

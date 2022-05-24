@@ -114,23 +114,25 @@ include 'assets/dist/sql/.env';
                         </div>
                         <div class="col-md-6">
                             <div class="mb-2">
-                                <input class="form-control" list="datalistOptions" placeholder="Tarefa" required>
-                                <datalist id="datalistOptions">
-                                    <option value="San Francisco">
-                                    <option value="New York">
-                                    <option value="Seattle">
-                                    <option value="Los Angeles">
-                                    <option value="Chicago">
+                                <input class="form-control" list="listTarefas" placeholder="Tarefa" required>
+                                <datalist id="listTarefas">
+                                    <?php
+                                    $query = mysqli_query($conn, "SELECT * FROM tarefas");
+                                    while ($value =  mysqli_fetch_assoc($query)) {
+                                        echo '<option value="'.$value['nome'].'">';
+                                    }
+                                    ?>
                                 </datalist>
                             </div>
                             <div class="mb-2">
-                                <input class="form-control" list="datalistOptions" placeholder="Projeto" required>
-                                <datalist id="datalistOptions">
-                                    <option value="San Francisco">
-                                    <option value="New York">
-                                    <option value="Seattle">
-                                    <option value="Los Angeles">
-                                    <option value="Chicago">
+                                <input class="form-control" list="listProjeto" placeholder="Projeto" required>
+                                <datalist id="listProjeto">
+                                    <?php
+                                    $query = mysqli_query($conn, "SELECT * FROM projetos");
+                                    while ($value =  mysqli_fetch_assoc($query)) {
+                                        echo '<option value="'.$value['nome'].'">';
+                                    }
+                                    ?>
                                 </datalist>
                             </div>
                         </div>
@@ -362,23 +364,19 @@ include 'assets/dist/sql/.env';
                         </div>
                         <div class="row">
                             <div class="col mb-2">
-                                <input class="form-control" list="datalistOptions" name="cliente" placeholder="Cliente" required>
-                                <datalist id="datalistOptions">
-                                    <option value="San Francisco">
-                                    <option value="New York">
-                                    <option value="Seattle">
-                                    <option value="Los Angeles">
-                                    <option value="Chicago">
+                                <input class="form-control" list="listClientes" name="cliente" placeholder="Cliente" required>
+                                <datalist id="listClientes">
+                                    <?php
+                                    $query = mysqli_query($conn, "SELECT * FROM cliente");
+                                    while ($value =  mysqli_fetch_assoc($query)) {
+                                        echo '<option value="'.$value['nome'].'">';
+                                    }
+                                    ?>
                                 </datalist>
                             </div>
                             <div class="col mb-2">
-                                <input class="form-control" list="datalistOptions" name="tarefa" placeholder="Tarefa" required>
-                                <datalist id="datalistOptions">
-                                    <option value="San Francisco">
-                                    <option value="New York">
-                                    <option value="Seattle">
-                                    <option value="Los Angeles">
-                                    <option value="Chicago">
+                                <input class="form-control" list="listTarefas" name="tarefa" placeholder="Tarefa">
+                                <datalist id="listTarefas">
                                 </datalist>
                             </div>
                         </div>
