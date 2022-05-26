@@ -109,28 +109,28 @@ include 'assets/dist/sql/.env';
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-2">
-                                <textarea class="form-control" placeholder="O que esta fazendo?" rows="3"></textarea>
+                                <textarea class="form-control" id="texteareaDescricao" placeholder="O que esta fazendo?" rows="3"></textarea>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-2">
-                                <input class="form-control" list="listTarefas" placeholder="Tarefa" required>
+                                <input class="form-control" list="listTarefas" id="listTarefa" placeholder="Tarefa" required>
                                 <datalist id="listTarefas">
                                     <?php
                                     $query = mysqli_query($conn, "SELECT * FROM tarefas");
                                     while ($value =  mysqli_fetch_assoc($query)) {
-                                        echo '<option value="'.$value['nome'].'">';
+                                        echo '<option value="' . $value['nome'] . '">';
                                     }
                                     ?>
                                 </datalist>
                             </div>
                             <div class="mb-2">
-                                <input class="form-control" list="listProjeto" placeholder="Projeto" required>
+                                <input class="form-control" list="listProjeto" id="nomeProjeto" placeholder="Projeto" required>
                                 <datalist id="listProjeto">
                                     <?php
                                     $query = mysqli_query($conn, "SELECT * FROM projetos");
                                     while ($value =  mysqli_fetch_assoc($query)) {
-                                        echo '<option value="'.$value['nome'].'">';
+                                        echo '<option value="' . $value['nome'] . '">';
                                     }
                                     ?>
                                 </datalist>
@@ -138,24 +138,24 @@ include 'assets/dist/sql/.env';
                         </div>
                         <div class="row">
                             <div class="col d-grid">
-                                <button type="button" class="btn btn-outline-success">Salvar/Start</button>
+                                <button type="button" id="btnRegistroHoras" class="btn btn-outline-success">Começar a trabalhar</button>
                             </div>
-                            <div class="col-md-2 datepickers">
+                            <div class="col-md-2 datepickers" id="inicioHora">
                                 <div class="form-group">
                                     <div class="input-group date" id="id_1">
-                                        <input type="text" value="" class="form-control" placeholder="Ate: MM/DD/YYYY hh:mm:ss" required />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-2 datepickers">
-                                <div class="form-group">
-                                    <div class="input-group date" id="id_0">
                                         <input type="text" value="" class="form-control" placeholder="De: MM/DD/YYYY hh:mm:ss" required />
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-auto">
-                                <input type="text" class="form-control" placeholder="Tempo total" />
+                            <div class="col-md-2 datepickers" id="fimHora">
+                                <div class="form-group">
+                                    <div class="input-group date" id="id_0">
+                                        <input type="text" value="" class="form-control" placeholder="Até: MM/DD/YYYY hh:mm:ss" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-auto" id="divTotalHora">
+                                <input type="text" class="form-control" id="totalHora" placeholder="Tempo total" />
                             </div>
                         </div>
                     </div>
@@ -357,7 +357,7 @@ include 'assets/dist/sql/.env';
                 <form action="assets/dist/sql/sql.php" method="post">
                     <div class="modal-body">
                         <div class="col mb-2">
-                            <input type="text" class="form-control" name="nome" placeholder="Nome do projeto" aria-label="nome do projeto" required>
+                            <input type="text" class="form-control"  name="nome" placeholder="Nome do projeto" aria-label="nome do projeto" required>
                         </div>
                         <div class="mb-2">
                             <textarea class="form-control" rows="3" name="descricao" placeholder="Descrição"></textarea>
@@ -369,7 +369,7 @@ include 'assets/dist/sql/.env';
                                     <?php
                                     $query = mysqli_query($conn, "SELECT * FROM cliente");
                                     while ($value =  mysqli_fetch_assoc($query)) {
-                                        echo '<option value="'.$value['nome'].'">';
+                                        echo '<option value="' . $value['nome'] . '">';
                                     }
                                     ?>
                                 </datalist>
@@ -442,7 +442,19 @@ include 'assets/dist/sql/.env';
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
     <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/dist/js/dashboard.js"></script>
+    <script language="JavaScript" src="assets/dist/js/script.js"></script>
 </body>
-<script src="assets/dist/js/scripts.js"></script>
+<script>
+    document.getElementById("btnRegistroHoras").addEventListener("click", btnRegistroHoras);
+    document.getElementById("btnRegistroHoras").addEventListener("click", btnRegistroHoras);
+</script>
+<script>
+    // 
+    /***    comando para formatar string
+     * 
+     * n1.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})
+     * 
+     */
+</script>
 
 </html>
