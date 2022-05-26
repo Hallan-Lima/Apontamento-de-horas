@@ -138,7 +138,7 @@ include 'assets/dist/sql/.env';
                         </div>
                         <div class="row">
                             <div class="col d-grid">
-                                <button type="button" id="btnRegistroHoras" class="btn btn-outline-success">Começar a trabalhar</button>
+                                <button type="button" name="iniciarRegistroHoras" id="btnRegistroHoras" class="btn btn-outline-success">Começar a trabalhar</button>
                             </div>
                             <div class="col-md-2 datepickers" id="inicioHora">
                                 <div class="form-group">
@@ -155,7 +155,7 @@ include 'assets/dist/sql/.env';
                                 </div>
                             </div>
                             <div class="col-auto" id="divTotalHora">
-                                <input type="text" class="form-control" id="totalHora" placeholder="Tempo total" />
+                                <input type="text" class="text-center form-control" id="totalHora" placeholder="Tempo total" />
                             </div>
                         </div>
                     </div>
@@ -445,7 +445,6 @@ include 'assets/dist/sql/.env';
     <script language="JavaScript" src="assets/dist/js/script.js"></script>
 </body>
 <script>
-    document.getElementById("btnRegistroHoras").addEventListener("click", btnRegistroHoras);
     document.getElementById("btnRegistroHoras").addEventListener("click", btnRegistroHoras);
 </script>
 <script>

@@ -2,16 +2,39 @@ ss=00;
 mm=00;
 hh=00;
 
+console.log('teste')
+//função que valida o status do botão
 function btnRegistroHoras() {
     var btnRegistroHoras = document.getElementById("btnRegistroHoras");
+    var clicando = 0;
+
+    if ((btnRegistroHoras.name == 'registroPausado')&&(clicando == 0)) {
+        btnRegistroHoras.name = 'registrandoHoras';
+        iniciarRegistroHoras(btnRegistroHoras);
+        clicando++;
+    }
+    if ((btnRegistroHoras.name == 'registrandoHoras')&&(clicando == 0)) {
+        btnRegistroHoras.name = 'registroPausado'
+        btnRegistroHoras.innerText = 'PAUSADO';       
+        pausarRegistroHoras();
+        clicando++;
+    }
+    if ((btnRegistroHoras.name == 'iniciarRegistroHoras')&&(clicando == 0)) {
+        var totalHora = document.getElementById('totalHora');
+        totalHora.value = '00:00:00';
+        btnRegistroHoras.name = 'registrandoHoras';
+        iniciarRegistroHoras(btnRegistroHoras);
+        clicando++;
+    }
+    
+}
+function iniciarRegistroHoras(btnRegistroHoras) {
     var nomeProjeto = document.getElementById('nomeProjeto');
     var listTarefa = document.getElementById('listTarefa');
     var txtDescricao = document.getElementById('texteareaDescricao');
     var inicioHora = document.getElementById('inicioHora');
     var fimHora = document.getElementById('fimHora');
     var totalHora = document.getElementById('totalHora');
-    valida_btnRegistroHoras = btnRegistroHoras.innerHTML;
-
     var valida = 0;
 
     valida_nomeProjeto = validaCampoVazio(nomeProjeto);
@@ -24,18 +47,22 @@ function btnRegistroHoras() {
         txtDescricao.style.display = 'none';
         fimHora.style.display = 'none';
         inicioHora.style.display = 'none';
-        totalHora.value = '00:00';
-        btnRegistroHoras.innerText = 'TRABALHANDO';
-        
-        starTimer(btnRegistroHoras);
+        btnRegistroHoras.innerText = 'TRABALHANDO';       
+        starTimer(totalHora);
     }
 }
 function starTimer(display) {
-    cron = setInterval(() => { timer(display); }, 100);
+    cron = setInterval(() => { timer(display); }, 1000);
 }
-
-function pause() {
-
+function pausarRegistroHoras() {
+    clearInterval(cron);
+}
+function finalizarRegistroHoras(obj) {
+    clearInterval(cron);
+    hh = 00;
+    mm = 00;
+    ss = 00;
+    obj.value = '00:00:00';
 }
 function timer(display) {
     ss++;
@@ -46,22 +73,23 @@ function timer(display) {
         mm = 00;
         hh++;
     }}
-
     mm = mm*1;
     v = mm - 10
     if (v < 0) {
         mm = '0'+mm;
+    }
+    ss = ss*1;
+    v = ss - 10
+    if (v < 0) {
+        ss = '0'+ss;
     }
     hh = hh*1;
     v = hh - 10
     if (v < 0) {
         hh = '0'+hh;
     }
-    
-
-    t = hh+':'+mm;
-    console.log(display)
-    display.innerText = t;
+    t = hh+':'+mm+':'+ss;
+    display.value = t;
 }
 
 function validaCampoVazio(obj) {
