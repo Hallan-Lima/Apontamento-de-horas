@@ -102,18 +102,54 @@ include 'assets/dist/sql/.env';
                 </div>
             </nav>
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-                <div class="border- col">
+                <div class="col mb-4">
                     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                         <h1 class="h2">Novo Registro</h1>
                     </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-2">
-                                <textarea class="form-control" id="texteareaDescricao" placeholder="O que esta fazendo?" rows="3"></textarea>
+                    <div class="row mb-2">
+                        <div class="col">
+                            <div class="row">
+                                <div class="mb-2">
+                                    <textarea class="form-control" id="texteareaDescricao" placeholder="O que esta fazendo?" rows="1"></textarea>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col datepickers" id="inicioHora">
+                                    <div class="form-group">
+                                        <div class="input-group date" id="id_1">
+                                            <input type="text" id="valorHoraInicio" value="" class="form-control" placeholder="De: MM/DD/YYYY hh:mm:ss" required />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col datepickers" id="fimHora">
+                                    <div class="form-group">
+                                        <div class="input-group date" id="id_0">
+                                            <input type="text" id="valorHoraFim" value="" class="form-control" placeholder="Até: MM/DD/YYYY hh:mm:ss" required />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col d-grid">
+                                    <button type="button" name="iniciarRegistroHoras" id="btnRegistroHoras" class="btn btn-outline-success">Começar a trabalhar</button>
+                                </div>
+                                <div class="col" id="divInformacao" style="display: none;">
+                                    <div class="col">
+                                        <div class="p-2 bg-secondary text-white" id="msgProjeto_Tarefa">Secondary</div>
+                                    </div>
+                                </div>
+                                <div class="col-auto" id="divTotalHora">
+                                    <input type="text" class="text-center form-control" id="totalHora" placeholder="00:00:00" />
+                                </div>
+                                <div class="col" id="divFinalizar" style="display: none;">
+                                    <div class="col d-grid">
+                                        <button type="button" name="btnFinalizar" id="btnFinalizar" class="btn btn-outline-success">Finalizar Atividade</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="mb-2">
+                        <div class="col-md-4" id="divProjetoTerafas">
+                            <div class="mb-3 form-floating">
                                 <input class="form-control" list="listTarefas" id="listTarefa" placeholder="Tarefa" required>
                                 <datalist id="listTarefas">
                                     <?php
@@ -123,8 +159,9 @@ include 'assets/dist/sql/.env';
                                     }
                                     ?>
                                 </datalist>
+                                <label>Selecione uma Tarefa</label>
                             </div>
-                            <div class="mb-2">
+                            <div class="mb-2 form-floating">
                                 <input class="form-control" list="listProjeto" id="nomeProjeto" placeholder="Projeto" required>
                                 <datalist id="listProjeto">
                                     <?php
@@ -134,46 +171,16 @@ include 'assets/dist/sql/.env';
                                     }
                                     ?>
                                 </datalist>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col d-grid">
-                                <button type="button" name="iniciarRegistroHoras" id="btnRegistroHoras" class="btn btn-outline-success">Começar a trabalhar</button>
-                            </div>
-                            <div class="col-md-2 datepickers" id="inicioHora">
-                                <div class="form-group">
-                                    <div class="input-group date" id="id_1">
-                                        <input type="text" value="" class="form-control" placeholder="De: MM/DD/YYYY hh:mm:ss" required />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-2 datepickers" id="fimHora">
-                                <div class="form-group">
-                                    <div class="input-group date" id="id_0">
-                                        <input type="text" value="" class="form-control" placeholder="Até: MM/DD/YYYY hh:mm:ss" required />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-auto" id="divTotalHora">
-                                <input type="text" class="text-center form-control" id="totalHora" placeholder="Tempo total" />
+                                <label>Selecione um Projeto</label>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Relação de horas no mes - CLIENTE X</h1>
-                    <div class="btn-toolbar mb-2 mb-md-0">
-                        <div class="btn-group me-2">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Próximo</button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Anterior</button>
-                        </div>
-                        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                            <span data-feather="calendar"></span>
-                            Período
-                        </button>
+                    <div class="row">
+
+
                     </div>
                 </div>
-                <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+
                 <h2>Registros</h2>
                 <div class="table-responsive">
                     <table class="table table-striped table-sm">
@@ -302,6 +309,20 @@ include 'assets/dist/sql/.env';
                         </tbody>
                     </table>
                 </div>
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Relação de horas no mes - CLIENTE X</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <div class="btn-group me-2">
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Próximo</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Anterior</button>
+                        </div>
+                        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                            <span data-feather="calendar"></span>
+                            Período
+                        </button>
+                    </div>
+                </div>
+                <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
             </main>
         </div>
     </div>
@@ -357,7 +378,7 @@ include 'assets/dist/sql/.env';
                 <form action="assets/dist/sql/sql.php" method="post">
                     <div class="modal-body">
                         <div class="col mb-2">
-                            <input type="text" class="form-control"  name="nome" placeholder="Nome do projeto" aria-label="nome do projeto" required>
+                            <input type="text" class="form-control" name="nome" placeholder="Nome do projeto" aria-label="nome do projeto" required>
                         </div>
                         <div class="mb-2">
                             <textarea class="form-control" rows="3" name="descricao" placeholder="Descrição"></textarea>
@@ -445,7 +466,14 @@ include 'assets/dist/sql/.env';
     <script language="JavaScript" src="assets/dist/js/script.js"></script>
 </body>
 <script>
-    document.getElementById("btnRegistroHoras").addEventListener("click", btnRegistroHoras);
+    document.getElementById("btnRegistroHoras").addEventListener("click", function() {
+        btnInfHoras();
+        registrarHoras();
+    });
+
+    setInterval(() => {
+        btnInfHoras();
+    }, 1000);
 </script>
 <script>
     // 

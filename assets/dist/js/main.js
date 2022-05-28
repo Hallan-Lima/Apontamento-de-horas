@@ -1,7 +1,7 @@
 (function($) {
 
 	"use strict";
-
+ 
 	$('#id_0').datetimepicker({
     allowInputToggle: true,
     showClose: true,
@@ -27,7 +27,6 @@
 
 		  close:'fa fa-close'
 		},
-
 	});
 
 })(jQuery);
