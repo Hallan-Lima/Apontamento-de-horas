@@ -1,5 +1,7 @@
 <?php
 include 'assets/dist/sql/.env';
+include 'assets/dist/php/functions.php';
+
 ?>
 <!doctype html>
 <html lang="pt-BR">
@@ -24,6 +26,7 @@ include 'assets/dist/sql/.env';
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/dist/css/bootstrap-datetimepicker.min.css">
 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </head>
 
@@ -133,7 +136,7 @@ include 'assets/dist/sql/.env';
                                 <div class="col d-grid">
                                     <button type="button" name="iniciarRegistroHoras" id="btnRegistroHoras" class="btn btn-outline-success">Começar a trabalhar</button>
                                 </div>
-                                <div class="col" id="divInformacao" style="display: none;">
+                                <div class="col-md-6" id="divInformacao" style="display: none;">
                                     <div class="col">
                                         <div class="p-2 bg-secondary text-white" id="msgProjeto_Tarefa">Secondary</div>
                                     </div>
@@ -141,7 +144,7 @@ include 'assets/dist/sql/.env';
                                 <div class="col-auto" id="divTotalHora">
                                     <input type="text" class="text-center form-control" id="totalHora" placeholder="00:00:00" />
                                 </div>
-                                <div class="col" id="divFinalizar" style="display: none;">
+                                <div class="col-auto" id="divFinalizar" style="display: none;">
                                     <div class="col d-grid">
                                         <button type="button" name="btnFinalizar" id="btnFinalizar" class="btn btn-outline-success">Finalizar Atividade</button>
                                     </div>
@@ -175,10 +178,6 @@ include 'assets/dist/sql/.env';
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-
-
-                    </div>
                 </div>
 
                 <h2>Registros</h2>
@@ -193,120 +192,19 @@ include 'assets/dist/sql/.env';
                                 <th scope="col">Descrição</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>1,001</td>
-                                <td>random</td>
-                                <td>data</td>
-                                <td>placeholder</td>
-                                <td>text</td>
-                            </tr>
-                            <tr>
-                                <td>1,002</td>
-                                <td>placeholder</td>
-                                <td>irrelevant</td>
-                                <td>visual</td>
-                                <td>layout</td>
-                            </tr>
-                            <tr>
-                                <td>1,003</td>
-                                <td>data</td>
-                                <td>rich</td>
-                                <td>dashboard</td>
-                                <td>tabular</td>
-                            </tr>
-                            <tr>
-                                <td>1,003</td>
-                                <td>information</td>
-                                <td>placeholder</td>
-                                <td>illustrative</td>
-                                <td>data</td>
-                            </tr>
-                            <tr>
-                                <td>1,004</td>
-                                <td>text</td>
-                                <td>random</td>
-                                <td>layout</td>
-                                <td>dashboard</td>
-                            </tr>
-                            <tr>
-                                <td>1,005</td>
-                                <td>dashboard</td>
-                                <td>irrelevant</td>
-                                <td>text</td>
-                                <td>placeholder</td>
-                            </tr>
-                            <tr>
-                                <td>1,006</td>
-                                <td>dashboard</td>
-                                <td>illustrative</td>
-                                <td>rich</td>
-                                <td>data</td>
-                            </tr>
-                            <tr>
-                                <td>1,007</td>
-                                <td>placeholder</td>
-                                <td>tabular</td>
-                                <td>information</td>
-                                <td>irrelevant</td>
-                            </tr>
-                            <tr>
-                                <td>1,008</td>
-                                <td>random</td>
-                                <td>data</td>
-                                <td>placeholder</td>
-                                <td>text</td>
-                            </tr>
-                            <tr>
-                                <td>1,009</td>
-                                <td>placeholder</td>
-                                <td>irrelevant</td>
-                                <td>visual</td>
-                                <td>layout</td>
-                            </tr>
-                            <tr>
-                                <td>1,010</td>
-                                <td>data</td>
-                                <td>rich</td>
-                                <td>dashboard</td>
-                                <td>tabular</td>
-                            </tr>
-                            <tr>
-                                <td>1,011</td>
-                                <td>information</td>
-                                <td>placeholder</td>
-                                <td>illustrative</td>
-                                <td>data</td>
-                            </tr>
-                            <tr>
-                                <td>1,012</td>
-                                <td>text</td>
-                                <td>placeholder</td>
-                                <td>layout</td>
-                                <td>dashboard</td>
-                            </tr>
-                            <tr>
-                                <td>1,013</td>
-                                <td>dashboard</td>
-                                <td>irrelevant</td>
-                                <td>text</td>
-                                <td>visual</td>
-                            </tr>
-                            <tr>
-                                <td>1,014</td>
-                                <td>dashboard</td>
-                                <td>illustrative</td>
-                                <td>rich</td>
-                                <td>data</td>
-                            </tr>
-                            <tr>
-                                <td>1,015</td>
-                                <td>random</td>
-                                <td>tabular</td>
-                                <td>information</td>
-                                <td>text</td>
-                            </tr>
-                        </tbody>
+                        <?php
+                        $query = mysqli_query($conn, "SELECT * FROM registros");
+                        while ($value = mysqli_fetch_assoc($query)) {
+                            echo '<tr>';
+                            echo '<td>' . $value['tempoInicial'] . '</td>';
+                            echo '<td>' . $value['idProjeto'] . '</td>';
+                            echo '<td>' . $value['tempoTotal'] . '</td>';
+                            echo '<td> R$ 0,00 </td>';
+                            echo '<td>' . $value['descricao'] . '</td>';
+                            echo '</tr>';
+                        }
+                        echo '</tbody>';
+                        ?>
                     </table>
                 </div>
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
@@ -463,13 +361,17 @@ include 'assets/dist/sql/.env';
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
     <script src="assets/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/dist/js/dashboard.js"></script>
-    <script language="JavaScript" src="assets/dist/js/script.js"></script>
+
+    <script language="JavaScript" type="text/javascript" src="assets/dist/js/script.js"></script>
 </body>
 <script>
     document.getElementById("btnRegistroHoras").addEventListener("click", function() {
         btnInfHoras();
         registrarHoras();
     });
+    document.getElementById('btnFinalizar').addEventListener('click', function() {
+        finalizarRegistroHoras();
+    })
 
     setInterval(() => {
         btnInfHoras();

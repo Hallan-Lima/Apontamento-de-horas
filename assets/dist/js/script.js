@@ -62,6 +62,19 @@ function formatahhmmss(s){
     return formatado;
   }
 function reiniciarValores(obj) {
+    var btnRegistroHoras = document.getElementById("btnRegistroHoras");
+    var totalHora = document.getElementById('totalHora');
+    var divProjetoTerafas = document.getElementById('divProjetoTerafas');
+    var txtDescricao = document.getElementById('texteareaDescricao');
+    var inicioHora = document.getElementById('inicioHora');
+    var fimHora = document.getElementById('fimHora');
+    var divFinalizar = document.getElementById('divFinalizar');
+    var nomeProjeto = document.getElementById('nomeProjeto');
+    var listTarefa = document.getElementById('listTarefa');
+    var divInformacao = document.getElementById('divInformacao');
+    var valor_inicioHora = document.getElementById('valorHoraInicio');
+    var valor_fimHora = document.getElementById('valorHoraFim');
+
     switch (obj) {
         case 'totalHora':
             totalHora.value = '00:00:00';
@@ -70,6 +83,32 @@ function reiniciarValores(obj) {
         case 'btnRegistroHoras':
             btnRegistroHoras.innerText = 'Começar a trabalhar'
             btnRegistroHoras.name = 'iniciarRegistroHoras';
+            break;
+        case 'total':
+            btnRegistroHoras.innerText = 'Começar a trabalhar'
+            btnRegistroHoras.name = 'iniciarRegistroHoras';
+            txtDescricao.value = '';
+            valor_fimHora.value = '';
+            valor_inicioHora.value = '';
+            listTarefa.value = '';
+            nomeProjeto.value = '';
+            totalHora.value = '00:00:00';
+            totalHora.disabled = false;
+            divProjetoTerafas.style.display = 'block';
+            txtDescricao.style.display = 'block';
+            fimHora.style.display = 'block';
+            inicioHora.style.display = 'block';
+            divInformacao.style.display = 'none';
+            divFinalizar.style.display = 'none';
+            listTarefa.classList.remove('is-invalid');
+            listTarefa.classList.remove('is-valid');
+            nomeProjeto.classList.remove('is-invalid');
+            nomeProjeto.classList.remove('is-valid');
+            btnRegistroHoras.classList.remove('btn-outline-secondary');
+            btnRegistroHoras.classList.add('btn-outline-success');
+            hh = 00;
+            mm = 00;
+            ss = 00;
             break;
     
         default:
@@ -152,12 +191,39 @@ function starTimer(display) {
 function pausarRegistroHoras() {
     clearInterval(cron);
 }
-function finalizarRegistroHoras(obj) {
+function finalizarRegistroHoras() {
+    var totalHora = document.getElementById('totalHora').value;
+    var nomeProjeto = document.getElementById('nomeProjeto').value;
+    var listTarefa = document.getElementById('listTarefa').value;
+    var valorHoraInicio = document.getElementById('valorHoraInicio').value;
+    var valorHoraFim = document.getElementById('valorHoraFim').value;
+
     clearInterval(cron);
-    hh = 00;
-    mm = 00;
-    ss = 00;
-    obj.value = '00:00:00';
+    reiniciarValores('total');
+
+    $.ajax({
+        url : "assets/dist/sql/sql.php",
+        type : 'post',
+        data : {
+             validaOpcao: 'validaOpcao',
+             horas: totalHora,
+             projeto: nomeProjeto,
+             tarefa: listTarefa,
+             inicioHora: valorHoraInicio,
+             fimHora: valorHoraFim
+
+        },
+        beforeSend : function(){
+             $("#resultado").html("ENVIANDO...");
+             console.log('enviado')
+        }
+    })
+    .done(function(msg){
+        $("#resultado").html(msg);
+    })
+    .fail(function(jqXHR, textStatus, msg){
+        alert(msg);
+    });
 }
 function timer(display) {
     ss++;
@@ -209,15 +275,14 @@ function contadorHoras(obj) {
     return obj;
 }
 function tratamentoValida(obj, campoIncluirClass) {
+    campoIncluirClass.classList.remove('is-invalid');
+    campoIncluirClass.classList.remove('is-valid');
     if (obj) {
         var valida = 1;
         campoIncluirClass.classList.add('is-valid');
-        campoIncluirClass.classList.remove('is-invalid');;
     }else{
         var valida = 0;
         campoIncluirClass.classList.add('is-invalid');
-        campoIncluirClass.classList.remove('is-valid');;
     }
     return valida;
 }
-

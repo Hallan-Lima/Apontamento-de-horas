@@ -1,14 +1,24 @@
 <?php
+
+use LDAP\Result;
+
 if (isset($_POST['validaOpcao'])) {
     $validaOpcao = $_POST['validaOpcao'];
-    montarQuery();
+    $validaOpcao = $_REQUEST['validaOpcao'];
+    montarQuery(null);
 }
-function montarQuery() {
+function montarQuery($obj) {
 global $validaOpcao;
 $insertTable = "INSERT INTO ";
+$selectFrom = "SELECT * FROM ";
 $tarefaTabela = 'tarefas';
 $clienteTabela = 'cliente';
 $projetoTabela = 'projetos';
+$registroTabela = 'registros';
+
+if ($obj != null) {
+    $validaOpcao = $obj;
+}
 
 if (isset($_POST['nome'])) {
     $nome = $_POST['nome'];
@@ -83,17 +93,26 @@ switch ($validaOpcao) {
         $query = $insertTable.$projetoTabela." (`nome`,`descricao`,`".$opProjetosValor."`,`idCliente`,`idTarefas`) 
         VALUES ('".$nome."','".$descricao."','".$valor."','".$idCliente."','".$idTarefa."') ";
         break;
+    case 'registroHoras':
+        $query = "INSERT INTO registros (id, descricao, tempoTotal, tempoInicial, tempoFinal, idProjeto, idTarefas) VALUES (DEFAULT, 'teste', '123', '','','0','0')";
+        break;
+    case 'registroCadastrados':
+        $query = $selectFrom.$registroTabela;
+        break;
     
     default:
         break;
 }
-echo $query;
+
 $query = queryBD($query);
 if ($query) {
     retornUser('1');
 }else {
     retornUser('3');
-}}
+}
+
+return $query;
+}
 function incluiAnd($var){
     $var = $var.' AND ';
     return $var;
@@ -107,4 +126,20 @@ function retornUser($msg) {
 //implementar sistema de retorno ao usuario
 header('Location: ../../../index.php?inf='.$msg);
 die;
+}
+function montarTabela() {
+    $result = montarQuery('registroCadastrados');
+    print_r($result);
+    echo '<tbody>';
+    while ($value = mysqli_fetch_assoc($result)) {
+        echo '<tr>';
+        echo '<td>'.$value[3].'</td>';
+        echo '<td>'.$value[6].'</td>';
+        echo '<td>'.$value[5].'</td>';
+        echo '<td> R$ 0,00 </td>';
+        echo '<td>'.$value[1].'</td>';
+        echo '</tr>';
+    }
+    echo '</tbody>';
+    return $result;
 }
