@@ -5,6 +5,8 @@ $contatoLinkedin  = 'https://www.linkedin.com/in/h%C3%A1llan/';
 $contatoSkype     = 'https://join.skype.com/invite/DeIl7tg4Ohxd';
 $contatoGithub    = 'https://github.com/Hallan-Lima';
 $contatoEmail     = 'mailto:hallansrl@hotmail.com';
+$pix              = '';
+
 
 function nav($active)
 {
@@ -26,7 +28,7 @@ function nav($active)
         <div class="position-sticky pt-3">
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link ' . $activeDashboard . '" aria-current="page" href="../../index.php">
+                    <a class="nav-link ' . $activeDashboard . '" aria-current="page" href="index">
                         <span data-feather="home"></span>
                         Dashboard
                     </a>
@@ -44,7 +46,7 @@ function nav($active)
                     </a>
                 </li> --->
                 <li class="nav-item">
-                    <a class="nav-link ' . $activeRelatorio . '" href="assets/pages/relatorio.php">
+                    <a class="nav-link ' . $activeRelatorio . '" href="relatorio">
                         <span data-feather="bar-chart-2"></span>
                         Relatório
                     </a>
@@ -112,7 +114,7 @@ function estruturaModal()
                     <h5 class="modal-title">Registrar Cliente</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="fechar"></button>
                 </div>
-                <form action="assets/dist/sql/sql.php" method="post">
+                <form action="assets/dist/php/sql.php" method="post">
                     <div class="modal-body">
                         <div class="row mb-2">
                             <div class="col">
@@ -198,9 +200,8 @@ function estruturaModal()
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Registrar Tarefa</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="assets/dist/sql/sql.php" method="post">
+                <form action="assets/dist/php/sql.php" method="post">
                     <div class="modal-body">
                         <div class="col mb-2">
                             <input type="text" name="nome" class="form-control" id="tarefaNome" placeholder="Nome" aria-label="nome" required>
@@ -213,8 +214,8 @@ function estruturaModal()
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                        <button type="submit" name="validaOpcao" value="cadastrarTarefa" id="cadastrarTarefa" class="btn btn-primary">Cadastrar</button>
+                        <button type="submit" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-end" name="validaOpcao" value="cadastrarTarefa" id="cadastrarTarefa"><strong>Cadastrar</strong></button>
+                        <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0" data-bs-dismiss="modal">Fechar</button>
                     </div>
                 </form>
             </div>

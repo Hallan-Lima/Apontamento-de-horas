@@ -1,36 +1,3 @@
-<?php
-include '../dist/php/functions.php';
-include '../dist/php/sql.php';
-$pix = '123';
-?>
-<!doctype html>
-<html lang="pt-BR">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="Hállan Lima">
-    <meta name="generator" content="Hugo 0.84.0">
-    <title>Registro de Horas</title>
-
-    <link rel="stylesheet" href="../dist/css/style.css">
-
-    <!-- Bootstrap core CSS -->
-    <link href="../dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/dashboard/">
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/footers/">
-
-    <!-- Custom styles for this template -->
-    <link href="../dist/css/dashboard.css" rel="stylesheet">
-
-    <!-- datepickers core CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/dist/css/bootstrap-datetimepicker.min.css">
-
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-</head>
 
 <body>
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
@@ -63,7 +30,7 @@ $pix = '123';
                         <a href="#" data-bs-target="#selecionarCliente" data-bs-toggle="modal">
                             <button type="button" class="btn btn-sm btn-outline-secondary">Selecionar Cliente</button>
                         </a>
-                        <a href="../pages/relatorio.php">
+                        <a href="relatorio">
                             <button type="button" class="btn btn-sm btn-outline-secondary">Todos</button>
                         </a>
                     </div>
@@ -88,23 +55,23 @@ $pix = '123';
                             <?php echo $mes; ?>
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMes">
-                            <li><a class="dropdown-item" href="?m=atual">Mês Atual</a></li>
-                            <li><a class="dropdown-item" href="?m=anterior">Mês Anterior</a></li>
+                            <li><a class="dropdown-item" href="relatorio&m=atual">Mês Atual</a></li>
+                            <li><a class="dropdown-item" href="relatorio&m=anterior">Mês Anterior</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="?m=1">Janeiro</a></li>
-                            <li><a class="dropdown-item" href="?m=2">Fevereiro</a></li>
-                            <li><a class="dropdown-item" href="?m=3">Março</a></li>
-                            <li><a class="dropdown-item" href="?m=4">Abril</a></li>
-                            <li><a class="dropdown-item" href="?m=5">Maio</a></li>
-                            <li><a class="dropdown-item" href="?m=6">Junho</a></li>
-                            <li><a class="dropdown-item" href="?m=7">Julho</a></li>
-                            <li><a class="dropdown-item" href="?m=8">Agosto</a></li>
-                            <li><a class="dropdown-item" href="?m=9">Setembro</a></li>
-                            <li><a class="dropdown-item" href="?m=10">Outubro</a></li>
-                            <li><a class="dropdown-item" href="?m=11">Novembro</a></li>
-                            <li><a class="dropdown-item" href="?m=12">Dezembro</a></li>
+                            <li><a class="dropdown-item" href="relatorio&m=1">Janeiro</a></li>
+                            <li><a class="dropdown-item" href="relatorio&m=2">Fevereiro</a></li>
+                            <li><a class="dropdown-item" href="relatorio&m=3">Março</a></li>
+                            <li><a class="dropdown-item" href="relatorio&m=4">Abril</a></li>
+                            <li><a class="dropdown-item" href="relatorio&m=5">Maio</a></li>
+                            <li><a class="dropdown-item" href="relatorio&m=6">Junho</a></li>
+                            <li><a class="dropdown-item" href="relatorio&m=7">Julho</a></li>
+                            <li><a class="dropdown-item" href="relatorio&m=8">Agosto</a></li>
+                            <li><a class="dropdown-item" href="relatorio&m=9">Setembro</a></li>
+                            <li><a class="dropdown-item" href="relatorio&m=10">Outubro</a></li>
+                            <li><a class="dropdown-item" href="relatorio&m=11">Novembro</a></li>
+                            <li><a class="dropdown-item" href="relatorio&m=12">Dezembro</a></li>
                         </ul>
                     </div>
                 </div>
@@ -156,7 +123,7 @@ $pix = '123';
                     <h5 class="modal-title">Selecionar Cliente</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="#" method="post">
+                <form action="relatorio" method="post">
                     <div class="modal-body py-0">
                         <input class="form-control" list="litsP" name="buscarProjeto" placeholder="Projeto" required>
                         <datalist id="litsP">
@@ -177,11 +144,5 @@ $pix = '123';
 
 
 </body>
-
-<!-- Bootstrap core JS -->
-<script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
-<script src="../dist/js/bootstrap.bundle.min.js"></script>
-<script src="../dist/js/dashboard.js"></script>
 
 </html>

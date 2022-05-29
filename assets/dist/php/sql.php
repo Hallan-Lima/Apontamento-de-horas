@@ -308,7 +308,6 @@ if (isset($_GET['m'])) {
     $mes = $_GET['m'];
     if ($mes=='atual') {
         $mes = date('m');
-        echo $mes;
     }
     if ($mes=='anterior') {
         $mes = date('m');
@@ -318,6 +317,8 @@ if (isset($_GET['m'])) {
     if ($mes < 9) {
         $mes='0'.$mes;
     }
+}else {
+    $mes = date('m');
 }
 /** FIM
  * ESTRUTURA PARA A PAGINA - relatorio.php
