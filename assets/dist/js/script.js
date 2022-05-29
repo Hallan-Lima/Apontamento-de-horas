@@ -138,8 +138,6 @@ function registrarHoras() {
             pausarRegistroHoras();
             clicando++;
         }
-
-        console.log('teste')
         if ((btnRegistroHoras.name == 'cadastrarRegistro')&&(clicando == 0)) {
             finalizarRegistroHoras('registrar');
             btnRegistroHoras.name = 'iniciarRegistroHoras'
@@ -217,7 +215,7 @@ function finalizarRegistroHoras(obj) {
         clearInterval(cron);
     }
     reiniciarValores('total');
-    $.post( "assets/dist/sql/sql.php", { 
+    $.post( "assets/dist/php/sql.php", { 
         validaOpcao: 'registroHoras',
         descricao: txtDescricao,
         valor:  totalHora,
@@ -268,17 +266,6 @@ function validaCampoVazio(obj) {
     } 
     return result;
 }
-function contadorHoras(obj) {
-    switch (obj) {
-        case 'hhmm':
-            obj = moment().format('h:mm');
-            break;
-    
-        default:
-            break;
-    }
-    return obj;
-}
 function tratamentoValida(obj, campoIncluirClass) {
     campoIncluirClass.classList.remove('is-invalid');
     campoIncluirClass.classList.remove('is-valid');
@@ -291,12 +278,3 @@ function tratamentoValida(obj, campoIncluirClass) {
     }
     return validaCampo;
 }
-// function atualizarRegistros() {
-//     $.get( "assets/dist/sql/sql.php?atualizarRegistros=0", function( data ) {
-//         html = data;
-//         tabelaRegistros = document.getElementById('tabelaRegistros');
-//         tabelaRegistros.remove
-//         tabelaRegistros = html;
-//         console.log('ok')
-//     });
-// }
