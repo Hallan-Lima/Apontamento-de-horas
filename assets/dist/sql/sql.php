@@ -1,10 +1,12 @@
 <?php
 
-use LDAP\Result;
+// if (isset($_GET['atualizarRegistros'])) {
+//     $result = montarTabela();
+//     echo json_encode($result);
+// }
 
 if (isset($_POST['validaOpcao'])) {
     $validaOpcao = $_POST['validaOpcao'];
-    $validaOpcao = $_REQUEST['validaOpcao'];
     montarQuery(null);
 }
 function montarQuery($obj) {
@@ -74,10 +76,30 @@ if (isset($_POST['tarefa'])) {
     if ($_POST['tarefa'] != '') {
     $tarefa = $_POST['tarefa'];
     $tarefaQuery = " nome='".$tarefa."' ";
-    $queryIDTarefa = 'SELECT id FROM '.$tarefaQuery.' WHERE '.$tarefaQuery;
+    $queryIDTarefa = 'SELECT id FROM '.$tarefaTabela.' WHERE '.$tarefaQuery;
     $queryIDTarefa = queryBD($queryIDTarefa);
     $queryIDTarefa = mysqli_fetch_assoc($queryIDTarefa);
     $idTarefa = $queryIDTarefa['id'];
+    }
+}
+if (isset($_POST['projeto'])) {
+    if ($_POST['projeto'] != '') {
+    $projeto = $_POST['projeto'];
+    $projetoQuery = " nome='".$projeto."' ";
+    $queryIDProjeto = 'SELECT id FROM '.$projetoTabela.' WHERE '.$projetoQuery;
+    $queryIDProjeto = queryBD($queryIDProjeto);
+    $queryIDProjeto = mysqli_fetch_assoc($queryIDProjeto);
+    $idProjeto = $queryIDProjeto['id'];
+    }
+}
+if (isset($_POST['valorHoraInicio'])) {
+    if ($_POST['valorHoraInicio'] != '') {
+    $valorHoraInicio = $_POST['valorHoraInicio'];
+    }
+}
+if (isset($_POST['valorHoraFim'])) {
+    if ($_POST['valorHoraFim'] != '') {
+    $valorHoraFim = $_POST['valorHoraFim'];
     }
 }
 switch ($validaOpcao) {
@@ -94,7 +116,8 @@ switch ($validaOpcao) {
         VALUES ('".$nome."','".$descricao."','".$valor."','".$idCliente."','".$idTarefa."') ";
         break;
     case 'registroHoras':
-        $query = "INSERT INTO registros (id, descricao, tempoTotal, tempoInicial, tempoFinal, idProjeto, idTarefas) VALUES (DEFAULT, 'teste', '123', '','','0','0')";
+        $query = $insertTable.$registroTabela." (id, descricao, tempoTotal, tempoInicial, tempoFinal, idProjeto, idTarefas)
+        VALUES ('DEFAULT', '$descricao', '$valor', '$valorHoraInicio','$valorHoraFim','$idProjeto','$idTarefa')";
         break;
     case 'registroCadastrados':
         $query = $selectFrom.$registroTabela;
@@ -127,19 +150,19 @@ function retornUser($msg) {
 header('Location: ../../../index.php?inf='.$msg);
 die;
 }
-function montarTabela() {
-    $result = montarQuery('registroCadastrados');
-    print_r($result);
-    echo '<tbody>';
-    while ($value = mysqli_fetch_assoc($result)) {
-        echo '<tr>';
-        echo '<td>'.$value[3].'</td>';
-        echo '<td>'.$value[6].'</td>';
-        echo '<td>'.$value[5].'</td>';
-        echo '<td> R$ 0,00 </td>';
-        echo '<td>'.$value[1].'</td>';
-        echo '</tr>';
-    }
-    echo '</tbody>';
-    return $result;
-}
+// function montarTabela() {
+//     $result = montarQuery('registroCadastrados');
+//     // echo '<tbody>';
+//     // while ($value = mysqli_fetch_assoc($result)) {
+//     //     echo '<tr>';
+//     //     echo '<td>'.$value[3].'</td>';
+//     //     echo '<td>'.$value[6].'</td>';
+//     //     echo '<td>'.$value[5].'</td>';
+//     //     echo '<td> R$ 0,00 </td>';
+//     //     echo '<td>'.$value[1].'</td>';
+//     //     echo '</tr>';
+//     // }
+//     // echo '</tbody>';
+//     $result = mysqli_fetch_assoc($result);
+//     return $result;
+// }

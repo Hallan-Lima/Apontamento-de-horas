@@ -1,3 +1,4 @@
+valor_inicialHora=null;
 ss=00;
 mm=00;
 hh=00;
@@ -7,7 +8,7 @@ function btnInfHoras() {
     var totalHora = document.getElementById('totalHora');
     valorHoraInicio = document.getElementById('valorHoraInicio').value;
     valorHoraFim = document.getElementById('valorHoraFim').value;
-    valida = btnRegistroHoras.innerText;
+    validaTexto = btnRegistroHoras.innerText;
     
     valorHoraFim = valorHoraFim.split(' ');
     valorHoraInicio = valorHoraInicio.split(' ');
@@ -37,12 +38,12 @@ function btnInfHoras() {
             btnRegistroHoras.name = 'cadastrarRegistro';
             validarCampos();
         }else{
-        if (valida == 'CRIAR REGISTRO') {
+        if (validaTexto == 'CRIAR REGISTRO') {
             reiniciarValores('totalHora');
             reiniciarValores('btnRegistroHoras');
         }}
     }else{
-    if (valida == 'CRIAR REGISTRO') {
+    if (validaTexto == 'CRIAR REGISTRO') {
         reiniciarValores('totalHora');
         reiniciarValores('btnRegistroHoras');
     }}
@@ -118,8 +119,8 @@ function reiniciarValores(obj) {
 
 //função que valida o status do botão
 function registrarHoras() {
-    valida = validarCampos();
-    if (valida) {
+    v = validarCampos();
+    if (v) {
         var clicando = 0;
         var totalHora = document.getElementById('totalHora');
         var btnRegistroHoras = document.getElementById("btnRegistroHoras");
@@ -135,6 +136,13 @@ function registrarHoras() {
             btnRegistroHoras.name = 'registroPausado'
             btnRegistroHoras.innerText = 'PAUSADO';       
             pausarRegistroHoras();
+            clicando++;
+        }
+
+        console.log('teste')
+        if ((btnRegistroHoras.name == 'cadastrarRegistro')&&(clicando == 0)) {
+            finalizarRegistroHoras('registrar');
+            btnRegistroHoras.name = 'iniciarRegistroHoras'
             clicando++;
         }
         if ((btnRegistroHoras.name == 'iniciarRegistroHoras')&&(clicando == 0)) {
@@ -179,11 +187,15 @@ function validarCampos() {
         btnRegistroHoras.classList.remove('btn-outline-success');
         btnRegistroHoras.classList.add('btn-outline-secondary');
         btnRegistroHoras.innerText = 'Clique aqui para pausar';
-        valida = true;     
+        valor_inicialHora = moment().format('DD/MM/YYYY hh:mm:ss A'); 
+        result = true;     
     }else{
-        valida = false;     
+        result = false;     
     }
-    return valida;
+    if (valida >= 2 && nameRegistroHoras == 'cadastrarRegistro') {
+        result = true;
+    }
+    return result;
 }
 function starTimer(display) {
     cron = setInterval(() => { timer(display); }, 1000);
@@ -191,38 +203,31 @@ function starTimer(display) {
 function pausarRegistroHoras() {
     clearInterval(cron);
 }
-function finalizarRegistroHoras() {
+function finalizarRegistroHoras(obj) {
     var totalHora = document.getElementById('totalHora').value;
     var nomeProjeto = document.getElementById('nomeProjeto').value;
     var listTarefa = document.getElementById('listTarefa').value;
-    var valorHoraInicio = document.getElementById('valorHoraInicio').value;
-    var valorHoraFim = document.getElementById('valorHoraFim').value;
+    var txtDescricao = document.getElementById('texteareaDescricao').value;
+    if (obj == 'registrar') {
+        valorHoraFim = document.getElementById('valorHoraFim').value;
+        valor_inicialHora = document.getElementById('valorHoraInicio').value;
 
-    clearInterval(cron);
+    }else{
+        var valorHoraFim = moment().format('DD/MM/YYYY hh:mm:ss A'); 
+        clearInterval(cron);
+    }
     reiniciarValores('total');
-
-    $.ajax({
-        url : "assets/dist/sql/sql.php",
-        type : 'post',
-        data : {
-             validaOpcao: 'validaOpcao',
-             horas: totalHora,
-             projeto: nomeProjeto,
-             tarefa: listTarefa,
-             inicioHora: valorHoraInicio,
-             fimHora: valorHoraFim
-
-        },
-        beforeSend : function(){
-             $("#resultado").html("ENVIANDO...");
-             console.log('enviado')
-        }
-    })
-    .done(function(msg){
-        $("#resultado").html(msg);
-    })
-    .fail(function(jqXHR, textStatus, msg){
-        alert(msg);
+    $.post( "assets/dist/sql/sql.php", { 
+        validaOpcao: 'registroHoras',
+        descricao: txtDescricao,
+        valor:  totalHora,
+        valorHoraInicio:  valor_inicialHora,
+        valorHoraFim: valorHoraFim,
+        tarefa: listTarefa,
+        projeto: nomeProjeto,
+    } )
+    .done(function( data ) {
+    console.log( "Sucesso: " + data );
     });
 }
 function timer(display) {
@@ -278,11 +283,20 @@ function tratamentoValida(obj, campoIncluirClass) {
     campoIncluirClass.classList.remove('is-invalid');
     campoIncluirClass.classList.remove('is-valid');
     if (obj) {
-        var valida = 1;
+        var validaCampo = 1;
         campoIncluirClass.classList.add('is-valid');
     }else{
-        var valida = 0;
+        var validaCampo = 0;
         campoIncluirClass.classList.add('is-invalid');
     }
-    return valida;
+    return validaCampo;
 }
+// function atualizarRegistros() {
+//     $.get( "assets/dist/sql/sql.php?atualizarRegistros=0", function( data ) {
+//         html = data;
+//         tabelaRegistros = document.getElementById('tabelaRegistros');
+//         tabelaRegistros.remove
+//         tabelaRegistros = html;
+//         console.log('ok')
+//     });
+// }

@@ -182,7 +182,7 @@ include 'assets/dist/php/functions.php';
 
                 <h2>Registros</h2>
                 <div class="table-responsive">
-                    <table class="table table-striped table-sm">
+                    <table class="table table-striped table-sm" id="tabelaRegistros">
                         <thead>
                             <tr>
                                 <th scope="col">Data</th>
@@ -375,6 +375,7 @@ include 'assets/dist/php/functions.php';
 
     setInterval(() => {
         btnInfHoras();
+        // atualizarRegistros()
     }, 1000);
 </script>
 <script>
