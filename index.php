@@ -44,6 +44,127 @@ if ($url == 'index') {
 
 
 ?>
+<!-- Modal -->
+    <!-- INICIO - Modal Cliente -->
+    <div class="modal fade" id="modalCliente" tabindex="-1" aria-labelledby="modalCliente" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Registrar Cliente</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="fechar"></button>
+                </div>
+                <form action="assets/dist/php/sql.php" method="post">
+                    <div class="modal-body">
+                        <div class="row mb-2">
+                            <div class="col">
+                                <input type="text" class="form-control" name="nome" placeholder="Nome" aria-label="nome" required>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" class="form-control" name="valor" placeholder="R$ por Hora" aria-label="valor por hora" required>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <textarea class="form-control" rows="3" name="descricao" placeholder="Descrição"></textarea>
+                        </div>
+                        <div class="row">
+                            <div class="col mb-2">
+                                <input type="text" class="form-control" name="telefone" placeholder="Telefone" aria-label="telefone">
+                            </div>
+                            <div class="col mb-2">
+                                <input type="text" class="form-control" name="email" placeholder="Email" aria-label="email">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="submit" id="cadastrarCliente" name="validaOpcao" value="cadastrarCliente" class="btn btn-primary">Cadastrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- FIM - Modal Cliente -->
+    <!-- INICIO - Modal Projeto -->
+    <div class="modal fade" id="modalProjeto" tabindex="-1" aria-labelledby="modalProjeto" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Registrar Projeto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="assets/dist/sql/sql.php" method="post">
+                    <div class="modal-body">
+                        <div class="col mb-2">
+                            <input type="text" class="form-control" name="nome" placeholder="Nome do projeto" aria-label="nome do projeto" required>
+                        </div>
+                        <div class="mb-2">
+                            <textarea class="form-control" rows="3" name="descricao" placeholder="Descrição"></textarea>
+                        </div>
+                        <div class="row">
+                            <div class="col mb-2">
+                                <input class="form-control" list="listClientes" name="cliente" placeholder="Cliente" required>
+                                <datalist id="listClientes">
+                                    <?php
+                                    listClientes();
+                                    ?>
+                                </datalist>
+                            </div>
+                            <div class="col mb-2">
+                                <input class="form-control" list="listTarefas" name="tarefa" placeholder="Tarefa">
+                                <datalist id="listTarefas">
+                                    <?php
+                                    listaTarefas();
+                                    ?>
+                                </datalist>
+                            </div>
+                        </div>
+                        <div class="row mb-2">
+                            <div class="col">
+                                <input type="text" class="form-control" name="valorH" placeholder="R$ por Hora" aria-label="valor por hora">
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" name="valorU" placeholder="Valor único" aria-label="valor unico">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="submit" id="cadastrarProjeto" name="validaOpcao" value="cadastrarProjeto" class="btn btn-primary">Cadastrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- FIM - Modal Projeto -->
+    <!-- INICIO - Modal Tarefas -->
+    <div class="modal fade" id="modalTarefa" tabindex="-1" aria-labelledby="modalTarefa" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Registrar Tarefa</h5>
+                </div>
+                <form action="assets/dist/php/sql.php" method="post">
+                    <div class="modal-body">
+                        <div class="col mb-2">
+                            <input type="text" name="nome" class="form-control" id="tarefaNome" placeholder="Nome" aria-label="nome" required>
+                        </div>
+                        <div class="mb-2">
+                            <textarea name="descricao" class="form-control" rows="3" id="tarefaDescricao" placeholder="Descrição"></textarea>
+                        </div>
+                        <div class="col mb-2">
+                            <input type="text" name="valor" class="form-control" id="tarefaValor" placeholder="Valor adicional" aria-label="valor adicional">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-end" name="validaOpcao" value="cadastrarTarefa" id="cadastrarTarefa"><strong>Cadastrar</strong></button>
+                        <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0" data-bs-dismiss="modal">Fechar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- FIM - Modal Tarefas -->
+    <!-- Modal -->
 
 <!-- datepickers core JS -->
 <script src="assets/dist/js/jquery.min.js"></script>

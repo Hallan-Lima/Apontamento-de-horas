@@ -112,9 +112,7 @@
             </footer>
         </main>
     </div>
-    <?php
-    estruturaModal();
-    ?>
+
     <!-- INICIO - Modal Selecionar Cliente -->
     <div class="modal fade" id="selecionarCliente" tabindex="-1" aria-labelledby="selecionarCliente" aria-hidden="true">
         <div class="modal-dialog" role="document">

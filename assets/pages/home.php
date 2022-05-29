@@ -101,10 +101,6 @@
             </main>
         </div>
     </div>
-    <?php
-    
-    estruturaModal();
-    ?>
 
 </body>
 <script>
