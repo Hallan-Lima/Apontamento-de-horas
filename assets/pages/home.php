@@ -114,16 +114,8 @@
 
     setInterval(() => {
         btnInfHoras();
-        // atualizarRegistros()
     }, 1000);
 </script>
-<script>
-    // 
-    /***    comando para formatar string
-     * 
-     * n1.toLocaleString('pt-BR', {style: 'currency', currency:'BRL'})
-     * 
-     */
-</script>
+
 
 </html>

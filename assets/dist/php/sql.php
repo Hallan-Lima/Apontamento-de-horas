@@ -267,9 +267,20 @@ function formatarValores($tempoInicial, $idProjeto, $tempoTotal) {
         $valorProjeto = mysqli_fetch_array($valorProjeto);
         $valorProjeto = $valorProjeto['valor'];
     }
+    $tempoTotal = explode(':',$tempoTotal);
+    $h  = $tempoTotal[0]; 
+    $m  = $tempoTotal[1]; 
+    $s  = $tempoTotal[2]; 
+
+    $h = $h*60*60;
+    $m = $m*60;
+    $s = $h + $m;
+
     $valorProjeto   = intval($valorProjeto);
-    $tempoTotal     = intval($tempoTotal);
-    $valorProjeto   = $tempoTotal*$valorProjeto;
+    $valorProjeto = $valorProjeto/60/60;
+
+
+    $valorProjeto   = $s*$valorProjeto;
 
     $result = [
         'tempoInicial'  => $tempoInicial,
