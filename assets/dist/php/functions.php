@@ -1,5 +1,4 @@
 <?php
-$pix              = 'inf';
 
 function nav($active)
 {
@@ -113,13 +112,7 @@ $html .= '<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">';
 }
 
 function estruturaFooter() {
-$contatoTel       = '#';
-$contatoFac       = '#';
-$contatoLinkedin  = '#';
-$contatoSkype     = '#';
-$contatoGithub    = '#';
-$contatoEmail     = '#';
-
+include_once '../../../resources/ps/dadosPessoais.php';
     echo '
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
         <div class="col-md-4 d-flex align-items-center">
