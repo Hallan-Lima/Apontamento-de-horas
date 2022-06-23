@@ -35,11 +35,21 @@ include 'assets/dist/php/functions.php';
 
 $url = (isset($_GET['url'])) ? $_GET['url']:'index';
 if ($url == 'relatorio') {
+    $html = navHeader('relatorio');
+    echo $html;
     include 'assets/pages/relatorio.php';
 }
 if ($url == 'index') {
+    $html = navHeader('dashboard');
+    echo $html;
     include 'assets/pages/home.php';
 }
+if ($url == 'atualizarCadastro') {
+    $html = navHeader('dashboard');
+    echo $html;
+    include 'assets/pages/atualizarCadastro.php';
+}
+estruturaFooter();
 
 
 
