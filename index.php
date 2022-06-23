@@ -40,16 +40,27 @@ if ($url == 'relatorio') {
     $html = navHeader('relatorio');
     echo $html;
     include 'assets/pages/relatorio.php';
+    $url = false;
 }
 if ($url == 'index') {
     $html = navHeader('dashboard');
     echo $html;
     include 'assets/pages/home.php';
+    $url = false;
 }
 if ($url == 'atualizarCadastro') {
-    $html = navHeader('dashboard');
+    if (isset($_GET['cliente'])) {
+        $url = ('atualizarCadastroCliente');
+    }else {
+        $url=null;
+    }
+    $html = navHeader($url);
     echo $html;
     include 'assets/pages/atualizarCadastro.php';
+    $url=false;
+}
+if ($url) {
+    navHeader('');
 }
 estruturaFooter();
 

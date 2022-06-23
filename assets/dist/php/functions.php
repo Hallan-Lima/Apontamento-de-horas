@@ -4,6 +4,8 @@ function nav($active)
 {
     $activeDashboard = '';
     $activeRelatorio = '';
+    $active_AtualizarCadastroCliente = '';
+    $active_AtualizarCadastroProjeto = '';
     switch ($active) {
         case 'dashboard':
             $activeDashboard = 'active';
@@ -11,8 +13,15 @@ function nav($active)
         case 'relatorio':
             $activeRelatorio = 'active';
             break;
+        case 'atualizarCadastroCliente':
+            $active_AtualizarCadastroCliente = 'active';
+            break;
 
         default:
+        $activeDashboard = '';
+        $activeRelatorio = '';
+        $active_AtualizarCadastroCliente = '';
+        $active_AtualizarCadastroProjeto = '';
             break;
     }
     echo '
@@ -32,9 +41,15 @@ function nav($active)
                     </a>
                 </li> -->
                 <li class="nav-item">
-                    <a class="nav-link" href="atualizarCadastro&cliente">
+                    <a class="nav-link ' . $active_AtualizarCadastroCliente . '" href="atualizarCadastro&cliente">
                         <span data-feather="users"></span>
-                        Atualizar dados
+                        Atualizar dados - Cliente
+                    </a>
+                </li> 
+                <li class="nav-item">
+                    <a class="nav-link ' . $active_AtualizarCadastroProjeto . '" href="atualizarCadastro&Projeto">
+                        <span data-feather="users"></span>
+                        Atualizar dados - Projeto
                     </a>
                 </li> 
                 <li class="nav-item">
