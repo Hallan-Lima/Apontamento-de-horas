@@ -1,4 +1,5 @@
 valor_inicialHora=null;
+tempoSegundos=00;
 ss=00;
 mm=00;
 hh=00;
@@ -32,8 +33,6 @@ function btnInfHoras() {
             }
             horasRegistro = segundosFinal-segundosInicial;
             segundos = horasRegistro+dias;
-            horas = formatahhmmss(segundos);
-            totalHora.value = horas;
             btnRegistroHoras.innerText = 'CRIAR REGISTRO';
             btnRegistroHoras.name = 'cadastrarRegistro';
             validarCampos();
@@ -48,20 +47,7 @@ function btnInfHoras() {
         reiniciarValores('btnRegistroHoras');
     }}
 }
-function formatahhmmss(s){
-    function duas_casas(numero){
-      if (numero <= 9){
-        numero = "0"+numero;
-      }
-      return numero;
-    }
-    hora = duas_casas(Math.round(s/3600));
-    minuto = duas_casas(Math.round((s%3600)/60));
-    segundo = duas_casas((s%3600)%60);
-    formatado = hora+":"+minuto+":"+segundo;
-  
-    return formatado;
-  }
+
 function reiniciarValores(obj) {
     var btnRegistroHoras = document.getElementById("btnRegistroHoras");
     var totalHora = document.getElementById('totalHora');
@@ -229,26 +215,28 @@ function finalizarRegistroHoras(obj) {
     });
 }
 function timer(display) {
-    ss++;
-    if (ss == 59) {
+    ++ss;
+    ++tempoSegundos;
+    console.log(tempoSegundos);
+    if (ss == 60) {
         ss = 00;
-        mm++;
-    if(mm == 59) {
+        ++mm;
+    if(mm == 60) {
         mm = 00;
-        hh++;
+        ++hh;
     }}
-    mm = mm*1;
-    v = mm - 10
-    if (v < 0) {
-        mm = '0'+mm;
-    }
     ss = ss*1;
     v = ss - 10
     if (v < 0) {
         ss = '0'+ss;
     }
+    mm = mm*1;
+    v = mm - 10;
+    if (v < 0) {
+        mm = '0'+mm;
+    }
     hh = hh*1;
-    v = hh - 10
+    v = hh - 10;
     if (v < 0) {
         hh = '0'+hh;
     }

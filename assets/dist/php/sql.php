@@ -204,14 +204,15 @@ function montarTabela($buscarProjeto,$mes) {
         $v1 = $value['tempoInicial']; 
         $v2 = $value['idProjeto']; 
         $v3 = $value['tempoTotal'];
-        $result = formatarValores($v1,$v2,$v3);
-        $valorTotal += intval($result['valor']);
+        $v4 = $value['tempoFinal'];
+        $result = formatarValores($v1,$v2,$v3,$v4);
+        $valorTotal += $result['valor'];
         $result['valor'] = number_format($result['valor'], 2, ',', '.');
 
         echo '<tr>';
         echo '<td>' . $result['tempoInicial'] . '</td>';
         echo '<td>' . $result['nomeProjeto'] . '</td>';
-        echo '<td>' . $value['tempoTotal'] . '</td>';
+        echo '<td>' . $result['tempoTotal'] . '</td>';
         echo '<td>' . $result['valor'] . '</td>';
         echo '<td>' . $value['descricao'] . '</td>';
         echo '</tr>';
@@ -248,9 +249,7 @@ function listClientes() {
         echo '<option value="' . $value['nome'] . '">';
     }
 }
-function formatarValores($tempoInicial, $idProjeto, $tempoTotal) {
-    $tempoInicial = explode(' ',$tempoInicial);
-    $tempoInicial = $tempoInicial[0];
+function formatarValores($tempoInicial, $idProjeto, $tempoTotal, $tempoFinal) {
     $obj = [ 
         'inf' => 'idProjeto',
         'id' => $idProjeto,
@@ -267,25 +266,40 @@ function formatarValores($tempoInicial, $idProjeto, $tempoTotal) {
         $valorProjeto = mysqli_fetch_array($valorProjeto);
         $valorProjeto = $valorProjeto['valor'];
     }
-    $tempoTotal = explode(':',$tempoTotal);
-    $h  = $tempoTotal[0]; 
-    $m  = $tempoTotal[1]; 
-    $s  = $tempoTotal[2]; 
 
-    $h = $h*60*60;
-    $m = $m*60;
-    $s = $h + $m;
+    $tempoFinal = explode(' ',$tempoFinal);
+    $tempoFinal = explode(':',$tempoFinal[1]);
+    $tempoInicial = explode(' ',$tempoInicial);
+    $sTI = explode(':',$tempoInicial[1]);
+
+    $hTF  = $tempoFinal[0]; 
+    $mTF  = $tempoFinal[1]; 
+    $sTF  = $tempoFinal[2]; 
+    $hTI  = $sTI[0]; 
+    $mTI  = $sTI[1]; 
+    $sTI  = $sTI[2]; 
+
+    $hTF = $hTF*60*60;
+    $mTF = $mTF*60;
+    $hTI = $hTI*60*60;
+    $mTI = $mTI*60;
+    $sTF += $hTF + $mTF;
+    $sTI += $hTI + $mTI;
+
+    $s = $sTF-$sTI;
 
     $valorProjeto   = intval($valorProjeto);
     $valorProjeto = $valorProjeto/60/60;
-
-
+    
     $valorProjeto   = $s*$valorProjeto;
 
+    $tempoTotal = gmdate("H:i:s", $s);
+    
     $result = [
-        'tempoInicial'  => $tempoInicial,
+        'tempoInicial'  => $tempoInicial[0],
         'nomeProjeto'   => $projeto['nome'],
         'valor'   => $valorProjeto,
+        'tempoTotal'   => $tempoTotal,
     ];
     return $result;
 }
