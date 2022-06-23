@@ -1,7 +1,7 @@
 <?php
+include 'resources/ps/dadosPessoais.php';
 include 'assets/dist/php/sql.php';
 include 'assets/dist/php/functions.php';
-include 'resources/ps/dadosPessoais.php';
 
 
 ?>

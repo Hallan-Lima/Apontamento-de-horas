@@ -112,19 +112,19 @@ $html .= '<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">';
 }
 
 function estruturaFooter() {
-include_once '../../../resources/ps/dadosPessoais.php';
+    $dados = dados();
     echo '
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
         <div class="col-md-4 d-flex align-items-center">
             <span class="mb-3 mb-md-0 text-muted">&copy; 2022 Desenvolvido por <a href="https://portfolio.ghz.life/" target="_blank" class=" text-muted">Ghz.life</a></span>
         </div>
         <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-            <a class="me-2" href="'.$contatoTel.'" target="_blank" rel="whatsapp"><img src="https://img.icons8.com/ios-filled/24/6c757d/whatsapp--v1.png"/></a>
-            <a class="me-2" href="'.$contatoLinkedin.'" target="_blank" rel="linkedin"><img src="https://img.icons8.com/ios-filled/24/6c757d/linkedin--v1.png" /></a>
-            <a class="me-2" href="'. $contatoFac.'" target="_blank" rel="facebook"><img src="https://img.icons8.com/ios-filled/24/6c757d/facebook--v1.png" /></a>
-            <a class="me-2" href="'. $contatoSkype.'" target="_blank" rel="skype"><img src="https://img.icons8.com/ios-filled/24/6c757d/skype--v1.png" /></a>
-            <a class="me-2" href="'. $contatoGithub.'" target="_blank" rel="github"><img src="https://img.icons8.com/ios-filled/24/6c757d/github--v1.png" /></a>
-            <a class="me-2" href="'. $contatoEmail.'" target="_blank" rel="email"><img src="https://img.icons8.com/ios-filled/24/6c757d/email-open--v1.png" /></a>
+            <a class="me-2" href="'.$dados['contatoTel']. '" target="_blank" rel="whatsapp"><img src="https://img.icons8.com/ios-filled/24/6c757d/whatsapp--v1.png"/></a>
+            <a class="me-2" href="'.$dados['contatoLinkedin'].'" target="_blank" rel="linkedin"><img src="https://img.icons8.com/ios-filled/24/6c757d/linkedin--v1.png" /></a>
+            <a class="me-2" href="'.$dados['contatoFac'].'" target="_blank" rel="facebook"><img src="https://img.icons8.com/ios-filled/24/6c757d/facebook--v1.png" /></a>
+            <a class="me-2" href="'.$dados['contatoSkype'].'" target="_blank" rel="skype"><img src="https://img.icons8.com/ios-filled/24/6c757d/skype--v1.png" /></a>
+            <a class="me-2" href="'. $dados['contatoGithub'].'" target="_blank" rel="github"><img src="https://img.icons8.com/ios-filled/24/6c757d/github--v1.png" /></a>
+            <a class="me-2" href="'. $dados['contatoEmail'].'" target="_blank" rel="email"><img src="https://img.icons8.com/ios-filled/24/6c757d/email-open--v1.png" /></a>
         </ul>
     </footer>
     </main>
