@@ -266,3 +266,15 @@ function tratamentoValida(obj, campoIncluirClass) {
     }
     return validaCampo;
 }
+function infClienteCompleto() {
+    $.post( "assets/dist/php/sql.php", { 
+        validaOpcao: 'infClienteCompleto',
+        request: 'request',
+        cliente: 'Cristian',
+    } )
+    .done(function( data ) {
+        console.log( "Sucesso: " + data );
+    });
+    console.log( mandar);
+
+}

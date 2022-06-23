@@ -2,8 +2,6 @@
 include 'resources/ps/dadosPessoais.php';
 include 'assets/dist/php/sql.php';
 include 'assets/dist/php/functions.php';
-
-
 ?>
 <!doctype html>
 <html lang="pt-BR">
@@ -128,7 +126,8 @@ estruturaFooter();
                                 <input class="form-control" list="listClientes" name="cliente" placeholder="Cliente" required>
                                 <datalist id="listClientes">
                                     <?php
-                                    listClientes();
+                                    $html = listClientes();
+                                    echo $html;
                                     ?>
                                 </datalist>
                             </div>

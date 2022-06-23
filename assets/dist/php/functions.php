@@ -6,6 +6,7 @@ function nav($active)
     $activeRelatorio = '';
     $active_AtualizarCadastroCliente = '';
     $active_AtualizarCadastroProjeto = '';
+    $active_AtualizarCadastroTarefa = '';
     switch ($active) {
         case 'dashboard':
             $activeDashboard = 'active';
@@ -22,6 +23,7 @@ function nav($active)
         $activeRelatorio = '';
         $active_AtualizarCadastroCliente = '';
         $active_AtualizarCadastroProjeto = '';
+        $active_AtualizarCadastroTarefa = '';
             break;
     }
     echo '
@@ -41,18 +43,6 @@ function nav($active)
                     </a>
                 </li> -->
                 <li class="nav-item">
-                    <a class="nav-link ' . $active_AtualizarCadastroCliente . '" href="atualizarCadastro&cliente">
-                        <span data-feather="users"></span>
-                        Atualizar dados - Cliente
-                    </a>
-                </li> 
-                <li class="nav-item">
-                    <a class="nav-link ' . $active_AtualizarCadastroProjeto . '" href="atualizarCadastro&Projeto">
-                        <span data-feather="users"></span>
-                        Atualizar dados - Projeto
-                    </a>
-                </li> 
-                <li class="nav-item">
                     <a class="nav-link ' . $activeRelatorio . '" href="relatorio">
                         <span data-feather="bar-chart-2"></span>
                         Relatório
@@ -70,6 +60,32 @@ function nav($active)
                         Tarefas
                     </a>
                 </li> -->
+            </ul>
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+                <span>Atualizar</span>
+                <a class="link-secondary">
+                    <span data-feather="repeat"></span>
+                </a>
+            </h6>
+            <ul class="nav flex-column mb-2">
+                <li class="nav-item">
+                    <a class="nav-link ' . $active_AtualizarCadastroCliente . '" href="atualizarCadastro&cliente">
+                        <span data-feather="file-text"></span>
+                        Cliente
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link ' . $active_AtualizarCadastroProjeto . '" href="atualizarCadastro&projeto">
+                    <span data-feather="file-text"></span>
+                        Projeto
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link ' . $active_AtualizarCadastroTarefa . '" href="atualizarCadastro&tarefa">
+                    <span data-feather="file-text"></span>
+                        Tarefa
+                    </a>
+                </li>
             </ul>
             <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
                 <span>Cadastrar</span>
@@ -148,4 +164,50 @@ function estruturaFooter() {
 
 </body>
     ';
+}
+function atualizarCadastroCliente(){
+    $html = '
+     <div class="my-2 mb-2 form-floating">
+        <input class="form-control" list="listClientes" id="nomeCliente" placeholder="Cliente" required>
+        <datalist id="listClientes">';
+        $html .= listClientes();
+        $html .='
+        </datalist>
+        <label>Selecione um cliente</label>
+    </div>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Registrar Cliente</h5>
+        </div>
+            <div class="modal-body">
+                <div class="row mb-2">
+                    <div class="col">
+                        <input type="text" class="form-control" name="nome" placeholder="Nome" aria-label="nome" required>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="valor" placeholder="R$ por Hora" aria-label="valor por hora" required>
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <textarea class="form-control" rows="3" name="descricao" placeholder="Descrição"></textarea>
+                </div>
+                <div class="row">
+                    <div class="col mb-2">
+                        <input type="text" class="form-control" name="telefone" placeholder="Telefone" aria-label="telefone">
+                    </div>
+                    <div class="col mb-2">
+                        <input type="text" class="form-control" name="email" placeholder="Email" aria-label="email">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary">Ver Projetos</button>
+                <button type="button" class="btn btn-secondary">Descartar</button>
+                <button type="button" onclick="infClienteCompleto()" class="btn btn-primary">Atualizar</button>
+            </div>
+        </div>
+    </div>
+    
+    ';
+    return $html;
 }

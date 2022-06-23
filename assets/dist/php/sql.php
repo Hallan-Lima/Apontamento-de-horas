@@ -156,6 +156,17 @@ switch ($v) {
         $query = $selectFrom.$projetoTabela." WHERE nome='$idProjeto' ";
         $validaOpcao = false;
         break;
+    case 'infClienteCompleto':
+        $query = 'SELECT 
+            c.*, p.id as projeto_id, p.nome as projeto_nome, p.descricao as projeto_descricao, p.valorHora as projeto_valorHora, p.valorUnico as projeto_valorUnico 
+        FROM 
+            '.$clienteTabela.' as c
+            INNER JOIN '.$projetoTabela.' as p on p.idCliente= c.id
+        WHERE
+            c.nome="'.$obj['cliente'].'"
+        ';
+        $validaOpcao = false;
+        break;
     
     default:
         break;
@@ -168,6 +179,12 @@ if ($validaOpcao) {
     }else {
         retornUser('3');
     }
+}
+if ($v == 'infClienteCompleto') {
+    $query = mysqli_fetch_array($query);
+    echo "<script>";
+    echo "var mandar = ".print_r($query);
+    echo "</script>";
 }
 
 return $query;
@@ -244,10 +261,12 @@ function listProjeto() {
 }
 function listClientes() {
     global $conn;
+    $html = null;
     $query = mysqli_query($conn, "SELECT * FROM cliente");
     while ($value =  mysqli_fetch_assoc($query)) {
-        echo '<option value="' . $value['nome'] . '">';
+        $html.= '<option value="' . $value['nome'] . '">';
     }
+    return $html;
 }
 function formatarValores($tempoInicial, $idProjeto, $tempoTotal, $tempoFinal) {
     $obj = [ 

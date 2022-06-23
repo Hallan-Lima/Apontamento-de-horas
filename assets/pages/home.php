@@ -80,7 +80,7 @@
             </tr>
         </thead>
         <?php
-        montarTabela(null,null);
+            montarTabela(null,null);
         ?>
     </table>
 </div>
