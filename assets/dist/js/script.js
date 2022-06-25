@@ -266,15 +266,23 @@ function tratamentoValida(obj, campoIncluirClass) {
     }
     return validaCampo;
 }
-function infClienteCompleto() {
-    $.post( "assets/dist/php/sql.php", { 
-        validaOpcao: 'infClienteCompleto',
-        request: 'request',
-        cliente: 'Cristian',
-    } )
-    .done(function( data ) {
-        console.log( "Sucesso: " + data );
-    });
-    console.log( mandar);
 
-}
+let btnNomeCliente = document.getElementById('btnNomeCliente');
+btnNomeCliente.addEventListener("click", function() {
+    let nomeCliente = document.getElementById('nomeCliente');
+    const SPAN_CONTEUDO = document.getElementById('conteudoAtualizarCadastro');
+    if (nomeCliente.value != '') {
+        const BASE_URL = 'http://localhost/www/Apontamento%20de%20horas/assets/dist/php/functions.php?';
+        dados = 'nomeCliente='+nomeCliente.value;
+        $.post( BASE_URL+dados, function( data ) {
+            $(SPAN_CONTEUDO).html( data );
+            btnNomeCliente.innerText = 'Atualizar Registro'
+        });
+        SPAN_CONTEUDO.style.display = 'block';
+    }else{
+        if (btnNomeCliente.innerText != 'Buscar') {
+            btnNomeCliente.innerText = 'Buscar';
+            SPAN_CONTEUDO.style.display = 'none';
+        }
+    }
+});

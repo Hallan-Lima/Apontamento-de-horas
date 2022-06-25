@@ -180,12 +180,6 @@ if ($validaOpcao) {
         retornUser('3');
     }
 }
-if ($v == 'infClienteCompleto') {
-    $query = mysqli_fetch_array($query);
-    echo "<script>";
-    echo "var mandar = ".print_r($query);
-    echo "</script>";
-}
 
 return $query;
 }

@@ -165,49 +165,73 @@ function estruturaFooter() {
 </body>
     ';
 }
-function atualizarCadastroCliente(){
+function atualizarCadastroCliente($cliente){
+if (!$cliente) {
     $html = '
-     <div class="my-2 mb-2 form-floating">
-        <input class="form-control" list="listClientes" id="nomeCliente" placeholder="Cliente" required>
-        <datalist id="listClientes">';
-        $html .= listClientes();
-        $html .='
-        </datalist>
-        <label>Selecione um cliente</label>
-    </div>
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title">Registrar Cliente</h5>
-        </div>
-            <div class="modal-body">
-                <div class="row mb-2">
-                    <div class="col">
-                        <input type="text" class="form-control" name="nome" placeholder="Nome" aria-label="nome" required>
-                    </div>
-                    <div class="col-md-4">
-                        <input type="text" class="form-control" name="valor" placeholder="R$ por Hora" aria-label="valor por hora" required>
-                    </div>
-                </div>
-                <div class="mb-2">
-                    <textarea class="form-control" rows="3" name="descricao" placeholder="Descrição"></textarea>
-                </div>
-                <div class="row">
-                    <div class="col mb-2">
-                        <input type="text" class="form-control" name="telefone" placeholder="Telefone" aria-label="telefone">
-                    </div>
-                    <div class="col mb-2">
-                        <input type="text" class="form-control" name="email" placeholder="Email" aria-label="email">
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary">Ver Projetos</button>
-                <button type="button" class="btn btn-secondary">Descartar</button>
-                <button type="button" onclick="infClienteCompleto()" class="btn btn-primary">Atualizar</button>
+    <div class="row">
+        <div class="col">
+            <div class="my-2 mb-2 form-floating">
+                <input class="form-control" list="listClientes" id="nomeCliente" placeholder="Cliente" required>
+                <datalist id="listClientes">';
+                $html .= listClientes();
+                $html .='
+                </datalist>
+                <label>Selecione um cliente</label>
             </div>
         </div>
-    </div>
+        <div class="col-auto" style="margin-block: auto;">
+            <button type="button" id="btnNomeCliente" class="btn btn-outline-success">Buscar</button>
+        </div>
+    </div>';
     
-    ';
     return $html;
+
+}else {
+    require_once 'sql.php';
+    $obj = array(
+        'inf' => 'infClienteCompleto',
+        'cliente' => $cliente
+    );
+    $obj = montarQuery($obj);
+    $obj = mysqli_fetch_assoc($obj);
+        $html = '
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Registrar Cliente</h5>
+            </div>
+                <div class="modal-body idCliente" id="'.$obj['id'].'">
+                    <div class="row mb-2">
+                        <div class="col">
+                            <input type="text" class="form-control" name="nome" placeholder="Nome" aria-label="nome" value="'.$obj['nome'].'" required>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="valor" placeholder="R$ por Hora" aria-label="valor por hora" value="'.$obj['valor'].'" required>
+                        </div>
+                    </div>
+                    <div class="mb-2">
+                        <textarea class="form-control" rows="3" name="descricao" placeholder="Descrição" value="'.$obj['descricao'].'"></textarea>
+                    </div>
+                    <div class="row">
+                        <div class="col mb-2">
+                            <input type="text" class="form-control" name="telefone" placeholder="Telefone" aria-label="telefone" value="'.$obj['telefone'].'">
+                        </div>
+                        <div class="col mb-2">
+                            <input type="text" class="form-control" name="email" placeholder="Email" aria-label="email" value="'.$obj['email'].'">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary">Ver Projetos</button>
+                    <button type="button" class="btn btn-secondary">Descartar</button>
+                    <button type="button" class="btn btn-primary">Atualizar</button>
+                </div>
+            </div>
+        </div>
+        ';
+
+        echo $html;
+    }
+}
+if (isset($_GET['nomeCliente'])) {
+    atualizarCadastroCliente($_GET['nomeCliente']);
 }
