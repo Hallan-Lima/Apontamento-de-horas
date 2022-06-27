@@ -270,22 +270,22 @@ let btnNomeCliente = document.getElementById('btnNomeCliente');
 if (btnNomeCliente != null) {
     btnNomeCliente.addEventListener("click", function() {
         let nomeCliente = document.getElementById('nomeCliente');
-        buscarInf(nomeCliente);
+        buscarInf(nomeCliente.value);
     });
 }
-function buscarInf(nomeCliente) {
+function buscarInf(clienteBuscar) {
     const SPAN_CONTEUDO = document.getElementById('conteudoAtualizarCadastro');
-    let titleModal = document.querySelector('h5.modal-title');
-    titleModal.innerText = 'Atualizar - '+nomeCliente;
-    if (nomeCliente.value != '') {
+    const nomeCliente = document.getElementById('nomeCliente');
+    console.log(clienteBuscar);
+    if (clienteBuscar != '') {
         const BASE_URL = 'http://localhost/www/Apontamento%20de%20horas/assets/dist/php/functions.php?';
-        dados = 'nomeCliente='+nomeCliente.value;
-        $.post( BASE_URL+dados, function( data ) {
+        dados = 'nomeCliente='+clienteBuscar;
+        $.get( BASE_URL+dados, function( data ) {
             $(SPAN_CONTEUDO).html( data );
             btnNomeCliente.innerText = 'Atualizar Registro'
         });
         SPAN_CONTEUDO.style.display = 'block';
-    }else{
+    }if(nomeCliente.value == ''){
         if (btnNomeCliente.innerText != 'Buscar') {
             btnNomeCliente.innerText = 'Buscar';
             SPAN_CONTEUDO.style.display = 'none';

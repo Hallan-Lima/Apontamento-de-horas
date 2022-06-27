@@ -201,10 +201,11 @@ if (!$cliente) {
         <div class="modal-content">
         <form action="assets/dist/php/sql.php" method="post">
             <div class="modal-header">
-                <h5 class="modal-title"></h5>
+                <h5 class="modal-title">Registro - '.$obj['nome'].'</h5>
                 <div>
+                    <button type="button" class="btn btn-outline-danger">Deletar Cliente</button>
+                    <button type="button" onclick="buscarInf(`'.$obj['nome'].'`)" class="btn btn-outline-danger">Descartar Alterações</button>
                     <button type="button" class="btn btn-outline-info">Ver Projetos</button>
-                    <button type="button" onclick="buscarInf()" class="btn btn-outline-danger">Descartar</button>
                     <button type="submit" name="validaOpcao" value="atualizarCliente" class="btn btn-outline-success">Atualizar</button>
                 </div>
             </div>
