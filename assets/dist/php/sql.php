@@ -105,6 +105,9 @@ if (isset($_POST['valorHoraInicio'])) {
     $valorHoraInicio = $_POST['valorHoraInicio'];
     }
 }
+if (isset($_POST['idCliente'])) {
+    $idCliente = $_POST['idCliente'];
+}
 if (isset($_POST['valorHoraFim'])) {
     if ($_POST['valorHoraFim'] != '') {
     $valorHoraFim = $_POST['valorHoraFim'];
@@ -124,6 +127,19 @@ switch ($v) {
     case 'cadastrarCliente':
         $query = $insertTable.$clienteTabela." (`nome`,`descricao`,`valor`,`telefone`,`email`) 
         VALUES ('".$nome."','".$descricao."','".$valor."','".$telefone."','".$email."') ";
+        break;
+    case 'atualizarCliente':
+        $query = "UPDATE 
+            $clienteTabela
+        SET 
+            `nome`='".$nome."',
+            `descricao`='".$descricao."',
+            `valor`='".$valor."',
+            `telefone`='".$telefone."',
+            `email`='".$email."'
+        WHERE 
+            id='$idCliente';
+        ";
         break;
     case 'cadastrarProjeto':
         $query = $insertTable.$projetoTabela." (`nome`,`descricao`,`".$opProjetosValor."`,`idCliente`,`idTarefas`) 
@@ -161,7 +177,7 @@ switch ($v) {
             c.*, p.id as projeto_id, p.nome as projeto_nome, p.descricao as projeto_descricao, p.valorHora as projeto_valorHora, p.valorUnico as projeto_valorUnico 
         FROM 
             '.$clienteTabela.' as c
-            INNER JOIN '.$projetoTabela.' as p on p.idCliente= c.id
+            LEFT JOIN '.$projetoTabela.' as p on p.idCliente= c.id
         WHERE
             c.nome="'.$obj['cliente'].'"
         ';

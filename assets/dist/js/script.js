@@ -6,7 +6,6 @@ hh=00;
 
 function btnInfHoras() {
     var btnRegistroHoras = document.getElementById("btnRegistroHoras");
-    var totalHora = document.getElementById('totalHora');
     valorHoraInicio = document.getElementById('valorHoraInicio').value;
     valorHoraFim = document.getElementById('valorHoraFim').value;
     validaTexto = btnRegistroHoras.innerText;
@@ -143,17 +142,17 @@ function registrarHoras() {
     }    
 }
 function validarCampos() {
-    var btnRegistroHoras = document.getElementById("btnRegistroHoras");
-    var nomeProjeto = document.getElementById('nomeProjeto');
-    var listTarefa = document.getElementById('listTarefa');
-    var txtDescricao = document.getElementById('texteareaDescricao');
-    var inicioHora = document.getElementById('inicioHora');
-    var fimHora = document.getElementById('fimHora');
-    var divProjetoTerafas = document.getElementById('divProjetoTerafas');
-    var divFinalizar = document.getElementById('divFinalizar');
-    var divInformacao = document.getElementById('divInformacao');
-    var projetoTarefa = document.getElementById('msgProjeto_Tarefa');
-    var valida = 0;
+    let btnRegistroHoras = document.getElementById("btnRegistroHoras");
+    let nomeProjeto = document.getElementById('nomeProjeto');
+    let listTarefa = document.getElementById('listTarefa');
+    let txtDescricao = document.getElementById('texteareaDescricao');
+    let inicioHora = document.getElementById('inicioHora');
+    let fimHora = document.getElementById('fimHora');
+    let divProjetoTerafas = document.getElementById('divProjetoTerafas');
+    let divFinalizar = document.getElementById('divFinalizar');
+    let divInformacao = document.getElementById('divInformacao');
+    let projetoTarefa = document.getElementById('msgProjeto_Tarefa');
+    let valida = 0;
     nameRegistroHoras = btnRegistroHoras.name;
 
     valida_nomeProjeto = validaCampoVazio(nomeProjeto);
@@ -268,9 +267,16 @@ function tratamentoValida(obj, campoIncluirClass) {
 }
 
 let btnNomeCliente = document.getElementById('btnNomeCliente');
-btnNomeCliente.addEventListener("click", function() {
-    let nomeCliente = document.getElementById('nomeCliente');
+if (btnNomeCliente != null) {
+    btnNomeCliente.addEventListener("click", function() {
+        let nomeCliente = document.getElementById('nomeCliente');
+        buscarInf(nomeCliente);
+    });
+}
+function buscarInf(nomeCliente) {
     const SPAN_CONTEUDO = document.getElementById('conteudoAtualizarCadastro');
+    let titleModal = document.querySelector('h5.modal-title');
+    titleModal.innerText = 'Atualizar - '+nomeCliente;
     if (nomeCliente.value != '') {
         const BASE_URL = 'http://localhost/www/Apontamento%20de%20horas/assets/dist/php/functions.php?';
         dados = 'nomeCliente='+nomeCliente.value;
@@ -285,4 +291,9 @@ btnNomeCliente.addEventListener("click", function() {
             SPAN_CONTEUDO.style.display = 'none';
         }
     }
-});
+}
+
+
+function atualizarCadastro(btn) {
+    console.log(btn)
+}

@@ -194,14 +194,24 @@ if (!$cliente) {
     );
     $obj = montarQuery($obj);
     $obj = mysqli_fetch_assoc($obj);
+    if (!$obj) {
+        die;
+    }
         $html = '
         <div class="modal-content">
+        <form action="assets/dist/php/sql.php" method="post">
             <div class="modal-header">
-                <h5 class="modal-title">Registrar Cliente</h5>
+                <h5 class="modal-title"></h5>
+                <div>
+                    <button type="button" class="btn btn-outline-info">Ver Projetos</button>
+                    <button type="button" onclick="buscarInf()" class="btn btn-outline-danger">Descartar</button>
+                    <button type="submit" name="validaOpcao" value="atualizarCliente" class="btn btn-outline-success">Atualizar</button>
+                </div>
             </div>
-                <div class="modal-body idCliente" id="'.$obj['id'].'">
+                <div class="modal-body">
                     <div class="row mb-2">
                         <div class="col">
+                            <input class="d-none" name="idCliente" value="'.$obj['id'].'">
                             <input type="text" class="form-control" name="nome" placeholder="Nome" aria-label="nome" value="'.$obj['nome'].'" required>
                         </div>
                         <div class="col-md-4">
@@ -209,7 +219,7 @@ if (!$cliente) {
                         </div>
                     </div>
                     <div class="mb-2">
-                        <textarea class="form-control" rows="3" name="descricao" placeholder="Descrição" value="'.$obj['descricao'].'"></textarea>
+                        <textarea class="form-control" rows="3" name="descricao" placeholder="Descrição">'.$obj['descricao'].'</textarea>
                     </div>
                     <div class="row">
                         <div class="col mb-2">
@@ -220,11 +230,7 @@ if (!$cliente) {
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary">Ver Projetos</button>
-                    <button type="button" class="btn btn-secondary">Descartar</button>
-                    <button type="button" class="btn btn-primary">Atualizar</button>
-                </div>
+            </form>
             </div>
         </div>
         ';
