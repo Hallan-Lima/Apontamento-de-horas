@@ -265,7 +265,6 @@ function tratamentoValida(obj, campoIncluirClass) {
     }
     return validaCampo;
 }
-
 let btnNomeCliente = document.getElementById('btnNomeCliente');
 if (btnNomeCliente != null) {
     btnNomeCliente.addEventListener("click", function() {
@@ -276,7 +275,6 @@ if (btnNomeCliente != null) {
 function buscarInf(clienteBuscar) {
     const SPAN_CONTEUDO = document.getElementById('conteudoAtualizarCadastro');
     const nomeCliente = document.getElementById('nomeCliente');
-    console.log(clienteBuscar);
     if (clienteBuscar != '') {
         const BASE_URL = 'http://localhost/www/Apontamento%20de%20horas/assets/dist/php/functions.php?';
         dados = 'nomeCliente='+clienteBuscar;
@@ -292,8 +290,17 @@ function buscarInf(clienteBuscar) {
         }
     }
 }
-
-
 function atualizarCadastro(btn) {
     console.log(btn)
+}
+function buscarRegistros() {
+    const BASE_URL = 'http://localhost/www/Apontamento%20de%20horas/assets/dist/sql/sql.php?';
+    const SPAN_CONTEUDO = document.getElementsByClassName('montarRelacao');
+    let mes = document.getElementsByName('dropdownMes').value;
+    let buscarProjeto = document.getElementsByName('buscarProjeto').value;
+    dados = 'm='+mes;
+    dados += '&buscarProjeto='+buscarProjeto;
+    $.get( BASE_URL+dados, function( data ) {
+        $(SPAN_CONTEUDO).html( data );
+    });
 }

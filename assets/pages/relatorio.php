@@ -27,9 +27,9 @@
             </ul>
         </div>
         <div class="dropdown">
-            <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle me-2" id="dropdownMes" data-bs-toggle="dropdown" aria-expanded="false">
+            <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle me-2" id="dropdownMes" data-bs-toggle="dropdown" aria-expanded="false" value="<?php echo $mes; ?>">
                 <span data-feather="calendar"></span>
-                <?php echo $mes; ?>
+                    <?php echo $mes; ?>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMes">
                 <li><a class="dropdown-item" href="relatorio&m=atual">Mês Atual</a></li>
@@ -64,6 +64,7 @@
                 <th scope="col">Descrição</th>
             </tr>
         </thead>
+        <span class="montarRelacao"></span>
         <?php
         montarTabela($buscarProjeto, $mes);
         ?>
@@ -85,7 +86,7 @@
                 </div>
                 <form action="relatorio" method="post">
                     <div class="modal-body py-0">
-                        <input class="form-control" list="litsP" name="buscarProjeto" placeholder="Projeto" required>
+                        <input class="form-control" list="litsP" name="buscarProjeto" id="buscarProjeto" placeholder="Projeto" required>
                         <datalist id="litsP">
                             <?php
                             listProjeto();
